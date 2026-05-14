@@ -65,6 +65,48 @@
       .stats__card { padding: 36px 28px; }
       .expect__grid { grid-template-columns: 1fr; }
     }
+
+    /* Our Story */
+    .our-story { padding: 0 48px 0; max-width: 1280px; margin: 0 auto; }
+
+    /* Pull quote */
+    .story-quote { background: linear-gradient(135deg, var(--blue), var(--blue-dark)); border-radius: 24px; padding: 56px 60px; color: #fff; text-align: center; margin-bottom: 72px; position: relative; overflow: hidden; }
+    .story-quote::before { content: ''; position: absolute; top: -80px; right: -80px; width: 300px; height: 300px; border-radius: 50%; background: rgba(255,255,255,0.06); }
+    .story-quote__mark { font-size: 120px; line-height: 0.6; opacity: 0.25; font-family: Georgia, serif; margin-bottom: 16px; display: block; }
+    .story-quote__text { font-size: clamp(22px, 2.8vw, 32px); font-weight: 800; line-height: 1.25; letter-spacing: -0.5px; margin-bottom: 22px; position: relative; }
+    .story-quote__cite { font-size: 14px; opacity: 0.75; font-style: normal; }
+
+    /* Chapters */
+    .story-chapters { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 72px; }
+    .story-chapter { background: #fff; border-radius: 20px; padding: 36px 32px; border: 1px solid #EEF2F8; }
+    .story-chapter__num { font-size: 11px; font-weight: 800; color: var(--blue); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px; }
+    .story-chapter__head { font-size: 22px; font-weight: 800; color: var(--dark); margin-bottom: 16px; letter-spacing: -0.3px; }
+    .story-chapter__body { font-size: 14px; color: var(--muted); line-height: 1.8; }
+    .story-chapter__body + .story-chapter__body { margin-top: 12px; }
+
+    /* Milestones */
+    .story-milestones { margin-bottom: 72px; }
+    .story-milestones__head { font-size: 13px; font-weight: 800; color: var(--blue); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 32px; }
+    .milestones-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+    .milestone { background: #fff; border-radius: 16px; padding: 24px 22px; border: 1px solid #EEF2F8; border-top: 3px solid var(--blue); }
+    .milestone__year { font-size: 28px; font-weight: 900; color: var(--blue); letter-spacing: -0.5px; margin-bottom: 8px; }
+    .milestone__text { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* Closing scripture */
+    .story-scripture { background: var(--blue-soft); border-radius: 20px; padding: 44px 52px; text-align: center; margin-bottom: 80px; }
+    .story-scripture__text { font-size: clamp(18px, 2vw, 26px); font-weight: 700; color: var(--dark); line-height: 1.45; margin-bottom: 14px; font-style: italic; }
+    .story-scripture__ref { font-size: 13px; font-weight: 800; color: var(--blue); letter-spacing: 0.1em; text-transform: uppercase; }
+
+    @media (max-width: 1024px) {
+      .story-chapters { grid-template-columns: 1fr; }
+      .milestones-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .our-story { padding: 0 24px; }
+      .story-quote { padding: 40px 28px; }
+      .milestones-grid { grid-template-columns: 1fr 1fr; }
+      .story-scripture { padding: 36px 24px; }
+    }
   </style>
 </head>
 <body>
@@ -199,6 +241,86 @@
       </div>
     </div>
   </div>
+</section>
+
+
+<!-- OUR STORY -->
+<section class="our-story">
+
+  <div class="section-head section-head--center" style="margin-bottom:48px;">
+    <div class="section-head__kicker">
+      <div class="section-head__kicker-dot"></div>
+      <span class="section-head__kicker-text">Our Story</span>
+    </div>
+    <h2 class="section-head__h2">Born out of obedience.</h2>
+    <p class="section-head__subtitle">How two unlikely women, a prophetic word, and a pub function room became a church that changed a community.</p>
+  </div>
+
+  <div class="story-quote">
+    <span class="story-quote__mark">&ldquo;</span>
+    <blockquote class="story-quote__text">Whatever you are planning, now is the time &mdash; go for it!</blockquote>
+    <cite class="story-quote__cite">Prophetic word to Vanessa Richardson &mdash; Chris Cartwright, Kensington Temple &middot; October 1991</cite>
+  </div>
+
+  <div class="story-chapters">
+
+    <div class="story-chapter">
+      <div class="story-chapter__num">Chapter 01 &mdash; The Calling</div>
+      <div class="story-chapter__head">Two unlikely candidates.</div>
+      <p class="story-chapter__body">Vanessa Richardson was a trainer for secretaries. Soke Mun Ho was a dentist. Neither had formal Bible school training, nor experience leading a church. Yet God had other plans.</p>
+      <p class="story-chapter__body">From January 1991, the two met weekly to pray &mdash; not to plant a church, but simply to enjoy God&rsquo;s presence. As Vanessa played piano and they prayed in the Spirit, something was being birthed in the heavenly realm they could not yet see.</p>
+      <p class="story-chapter__body">Then on the night of 18 October 1991, God spoke clearly to Soke Mun: plant a church in Wembley and launch with a Christmas party. The very next morning, Chris Cartwright at Kensington Temple spoke a prophetic word to Vanessa &mdash; unknowingly confirming exactly what God had said the night before.</p>
+    </div>
+
+    <div class="story-chapter">
+      <div class="story-chapter__num">Chapter 02 &mdash; The First Church</div>
+      <div class="story-chapter__head">New wine in a pub.</div>
+      <p class="story-chapter__body">Wembley Christian Centre was born on <strong>Sunday 5 January 1992</strong>. The first venue was the Lord&rsquo;s Bar &mdash; the function room of the Century Tavern, a local pub. It held up to 50 people and cost just &pound;20 to hire for four hours, tea and coffee included.</p>
+      <p class="story-chapter__body">Their first invitation to the community? <em>&ldquo;Come on in and taste the new wine.&rdquo;</em> Boldly displayed on a welcome sign, those words were written by the pub manager himself &mdash; who came to faith in Jesus just six months later.</p>
+      <p class="story-chapter__body">The church&rsquo;s first convert had been reached through Soke Mun&rsquo;s dental surgery &mdash; a heroin addict who gave her life to Jesus in the dental chair. She was successfully rehabilitated, and her family remain committed Christians today.</p>
+    </div>
+
+    <div class="story-chapter">
+      <div class="story-chapter__num">Chapter 03 &mdash; Growth &amp; Multiplication</div>
+      <div class="story-chapter__head">One church, many lives.</div>
+      <p class="story-chapter__body">Over the years WCC grew steadily, planting daughter churches in Alperton and Pinner, and moving through several venues. In 1998 &mdash; a landmark year &mdash; WCC relocated to Preston Manor High School, and the church&rsquo;s name formally changed from Wembley Christian Fellowship to Wembley Christian Centre, reflecting a broadened vision: not just fellowship, but impact.</p>
+      <p class="story-chapter__body">In 2001, WCC adopted the G12 discipleship model, deepening its commitment to raising effective leaders from within. Sunday School had been running since 1994, and youth ministry since 1999 &mdash; rooted in the conviction that there is no junior dosage of the Holy Spirit.</p>
+      <p class="story-chapter__body">Today WCC is an established Elim Pentecostal church &mdash; multicultural, Spirit-filled, and still running on that original vision: <strong>Wembley and the world for Christ.</strong></p>
+    </div>
+
+  </div>
+
+  <div class="story-milestones">
+    <div class="story-milestones__head">Key Milestones</div>
+    <div class="milestones-grid">
+      <div class="milestone">
+        <div class="milestone__year">1991</div>
+        <div class="milestone__text">Weekly prayer meetings begin. First converts reached through Soke Mun&rsquo;s dental surgery.</div>
+      </div>
+      <div class="milestone">
+        <div class="milestone__year">1992</div>
+        <div class="milestone__text">WCC founded on 5 January at the Century Tavern. &ldquo;Come in and taste the new wine.&rdquo;</div>
+      </div>
+      <div class="milestone">
+        <div class="milestone__year">1994</div>
+        <div class="milestone__text">Sunday School launched &mdash; raising the next generation in the fullness of the Spirit.</div>
+      </div>
+      <div class="milestone">
+        <div class="milestone__year">1998</div>
+        <div class="milestone__text">Moved to Preston Manor High School. Name officially changed to Wembley Christian Centre.</div>
+      </div>
+      <div class="milestone">
+        <div class="milestone__year">2001</div>
+        <div class="milestone__text">G12 discipleship vision adopted. WCC Business Group launched. Youth ministry well established.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-scripture">
+    <div class="story-scripture__text">&ldquo;May the glory of the latter house be greater than the former, and in this place receive the peace of God, the LORD of hosts.&rdquo;</div>
+    <div class="story-scripture__ref">Haggai 2:9</div>
+  </div>
+
 </section>
 
 <!-- WHAT TO EXPECT -->
