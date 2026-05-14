@@ -51,17 +51,7 @@
       background: #fff;
       border-bottom: 1px solid #EEF2F8;
     }
-    .nav__logo {
-      display: flex; align-items: center; gap: 10px;
-    }
-    .nav__logo-mark {
-      width: 38px; height: 38px; border-radius: 10px;
-      background: linear-gradient(135deg, var(--blue), #64B8FF);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .nav__logo-mark span { color: #fff; font-weight: 900; font-size: 16px; }
-    .nav__logo-name { font-size: 16px; font-weight: 800; color: #fff; letter-spacing: -0.3px; }
+    .nav__logo { display: flex; align-items: center; }
     .nav__links {
       display: flex; gap: 26px; list-style: none; font-size: 14px; font-weight: 600;
     }
@@ -431,8 +421,7 @@
   <!-- NAV -->
   <nav class="nav">
     <a href="index.html" class="nav__logo">
-      <div class="nav__logo-mark"><span>W</span></div>
-      <span class="nav__logo-name">Wembley Christian Centre</span>
+      <img class="nav__logo-img" src="images/wembleylogo.svg" alt="Wembley Christian Centre">
     </a>
     <ul class="nav__links">
       <li><a href="index.html" class="active">Home</a></li>
@@ -689,8 +678,7 @@
 
     <div>
       <div class="footer__logo">
-        <div class="nav__logo-mark"><span>W</span></div>
-        <div class="footer__brand">Wembley Christian Centre</div>
+        <img class="nav__logo-img" src="images/wembleylogo.svg" alt="Wembley Christian Centre">
       </div>
       <p class="footer__tagline">
         Reach Out · Restore · Release. A vibrant, Spirit-filled church family in the heart of Wembley.
