@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meet the Team — Wembley Christian Centre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    /* Senior Leaders */
+    .senior-leaders { padding: 80px 48px 40px; max-width: 1280px; margin: 0 auto; }
+    .leaders-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+    .leader-card {
+      background: #fff; border-radius: 24px; overflow: hidden; border: 1px solid #EEF2F8;
+      display: grid; grid-template-columns: 1fr 1.3fr;
+    }
+    .leader-card__img { position: relative; min-height: 320px; }
+    .leader-card__img .img-placeholder { position: absolute; inset: 0; height: 100%; background: repeating-linear-gradient(135deg,#a8c8e6 0,#a8c8e6 1px,#dce8f3 0,#dce8f3 8px); }
+    .leader-card__body { padding: 36px 32px; display: flex; flex-direction: column; justify-content: center; }
+    .leader-card__role { font-size: 11px; font-weight: 800; color: var(--blue); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+    .leader-card__name { font-size: 26px; font-weight: 800; color: var(--dark); margin-bottom: 16px; letter-spacing: -0.5px; }
+    .leader-card__bio { font-size: 14px; color: var(--muted); line-height: 1.75; }
+
+    /* Ministry Team */
+    .ministry-team { padding: 40px 48px 80px; max-width: 1280px; margin: 0 auto; }
+    .ministry-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 12px; }
+    .ministry-card { background: #fff; border-radius: 20px; overflow: hidden; border: 1px solid #EEF2F8; }
+    .ministry-card__img { position: relative; height: 280px; }
+    .ministry-card__img .img-placeholder { position: absolute; inset: 0; height: 100%; background: repeating-linear-gradient(135deg,#bdd5ec 0,#bdd5ec 1px,#dce8f3 0,#dce8f3 8px); }
+    .ministry-card__body { padding: 22px 24px; }
+    .ministry-card__role { font-size: 10px; font-weight: 800; color: var(--blue); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
+    .ministry-card__name { font-size: 19px; font-weight: 800; color: var(--dark); margin-bottom: 10px; letter-spacing: -0.3px; }
+    .ministry-card__bio { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    /* CTA */
+    .team-cta { padding: 0 48px 80px; max-width: 1280px; margin: 0 auto; }
+    .team-cta__card {
+      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+      border-radius: 24px; padding: 56px 52px; color: #fff;
+      display: grid; grid-template-columns: 2fr 1fr; gap: 60px; align-items: center;
+    }
+    .team-cta__since { font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; margin-bottom: 14px; }
+    .team-cta__h2 { font-size: clamp(28px, 3.5vw, 42px); font-weight: 800; line-height: 1.1; letter-spacing: -0.5px; margin-bottom: 18px; }
+    .team-cta__desc { font-size: 16px; opacity: 0.85; line-height: 1.75; margin-bottom: 28px; max-width: 540px; }
+    .team-cta__img { height: 220px; border-radius: 16px; overflow: hidden; position: relative; }
+    .team-cta__img .img-placeholder { height: 100%; background: repeating-linear-gradient(135deg,#7faedb 0,#7faedb 1px,#b0cce4 0,#b0cce4 8px); }
+
+    @media (max-width: 1024px) {
+      .leaders-grid { grid-template-columns: 1fr; }
+      .leader-card { grid-template-columns: 1fr 1.5fr; }
+      .ministry-grid { grid-template-columns: 1fr 1fr; }
+      .team-cta__card { grid-template-columns: 1fr; }
+      .team-cta__img { display: none; }
+    }
+    @media (max-width: 768px) {
+      .senior-leaders, .ministry-team, .team-cta { padding: 40px 24px; }
+      .leader-card { grid-template-columns: 1fr; }
+      .leader-card__img { min-height: 240px; }
+      .ministry-grid { grid-template-columns: 1fr; }
+      .team-cta__card { padding: 36px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="img-placeholder page-hero__bg" style="background-image: repeating-linear-gradient(135deg,#a8c8e6 0,#a8c8e6 1px,#dce8f3 0,#dce8f3 8px);">
+    <span>team page hero</span>
+  </div>
+  <div class="page-hero__overlay"></div>
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">
+      <div class="nav__logo-mark"><span>W</span></div>
+      <span class="nav__logo-name">Wembley Christian Centre</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">What's On</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="sermons.html">Sermons</a></li>
+      <li><a href="team.html" class="active">Team</a></li>
+      <li><a href="life-groups.html">Life Groups</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="services.html" class="nav__cta">Plan a Visit ↗</a>
+  </nav>
+  <div class="page-hero__content">
+    <div class="page-hero__badge">✦ Team</div>
+    <h1 class="page-hero__h1">Meet the team.</h1>
+    <p class="page-hero__sub">A passionate group of people serving WCC and the people of Wembley with everything they've got.</p>
+  </div>
+  <div class="curve-divider">
+    <svg viewBox="0 0 1280 60" preserveAspectRatio="none"><path d="M0,60 C320,0 960,0 1280,60 L1280,60 L0,60Z" fill="#FAFBFF"/></svg>
+  </div>
+</section>
+
+<!-- SENIOR LEADERS -->
+<section class="senior-leaders">
+  <div class="section-head">
+    <div class="section-head__kicker">
+      <div class="section-head__kicker-dot"></div>
+      <span class="section-head__kicker-text">Senior Leadership</span>
+    </div>
+    <h2 class="section-head__h2">Our Lead Pastors</h2>
+  </div>
+  <div class="leaders-grid">
+
+    <div class="leader-card">
+      <div class="leader-card__img"><div class="img-placeholder"><span>Ps. David Olufemi</span></div></div>
+      <div class="leader-card__body">
+        <div class="leader-card__role">Senior Pastor</div>
+        <div class="leader-card__name">Ps. David Olufemi</div>
+        <p class="leader-card__bio">David founded WCC in 2001 with his wife Sarah. Passionate about prayer, the Holy Spirit and seeing people walk in their God-given destiny.</p>
+      </div>
+    </div>
+
+    <div class="leader-card">
+      <div class="leader-card__img"><div class="img-placeholder"><span>Ps. Sarah Adeyemi</span></div></div>
+      <div class="leader-card__body">
+        <div class="leader-card__role">Co-Pastor &amp; Worship</div>
+        <div class="leader-card__name">Ps. Sarah Adeyemi</div>
+        <p class="leader-card__bio">Sarah leads our worship and family ministries. A heart for women's discipleship and seeing households restored.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MINISTRY TEAM -->
+<section class="ministry-team">
+  <div class="section-head">
+    <div class="section-head__kicker">
+      <div class="section-head__kicker-dot"></div>
+      <span class="section-head__kicker-text">Ministry Leads</span>
+    </div>
+    <h2 class="section-head__h2">The Wider Team</h2>
+    <p class="section-head__subtitle">The faithful leaders making WCC the family it is — across all ministries.</p>
+  </div>
+  <div class="ministry-grid">
+
+    <div class="ministry-card">
+      <div class="ministry-card__img"><div class="img-placeholder"><span>Ps. Michael Okoye</span></div></div>
+      <div class="ministry-card__body">
+        <div class="ministry-card__role">Associate Pastor</div>
+        <div class="ministry-card__name">Ps. Michael Okoye</div>
+        <p class="ministry-card__bio">Oversees our discipleship and life groups ministry across Wembley.</p>
+      </div>
+    </div>
+
+    <div class="ministry-card">
+      <div class="ministry-card__img"><div class="img-placeholder"><span>Joyce Mensah</span></div></div>
+      <div class="ministry-card__body">
+        <div class="ministry-card__role">Youth Pastor</div>
+        <div class="ministry-card__name">Joyce Mensah</div>
+        <p class="ministry-card__bio">Leads our 11–18 ministry — passionate about raising the next generation.</p>
+      </div>
+    </div>
+
+    <div class="ministry-card">
+      <div class="ministry-card__img"><div class="img-placeholder"><span>Daniel Roberts</span></div></div>
+      <div class="ministry-card__body">
+        <div class="ministry-card__role">Worship Director</div>
+        <div class="ministry-card__name">Daniel Roberts</div>
+        <p class="ministry-card__bio">Leads the worship team, coordinating Sunday and special services.</p>
+      </div>
+    </div>
+
+    <div class="ministry-card">
+      <div class="ministry-card__img"><div class="img-placeholder"><span>Grace Okafor</span></div></div>
+      <div class="ministry-card__body">
+        <div class="ministry-card__role">Children's Ministry</div>
+        <div class="ministry-card__name">Grace Okafor</div>
+        <p class="ministry-card__bio">Heads up our amazing kids programme on Sundays — ages 0–10.</p>
+      </div>
+    </div>
+
+    <div class="ministry-card">
+      <div class="ministry-card__img"><div class="img-placeholder"><span>James Hartley</span></div></div>
+      <div class="ministry-card__body">
+        <div class="ministry-card__role">Operations Lead</div>
+        <div class="ministry-card__name">James Hartley</div>
+        <p class="ministry-card__bio">Keeps the church running — facilities, finance and welcome teams.</p>
+      </div>
+    </div>
+
+    <div class="ministry-card">
+      <div class="ministry-card__img"><div class="img-placeholder"><span>Esther Nwosu</span></div></div>
+      <div class="ministry-card__body">
+        <div class="ministry-card__role">Outreach Coordinator</div>
+        <div class="ministry-card__name">Esther Nwosu</div>
+        <p class="ministry-card__bio">Leads Bethel Kaf and our community outreach into Wembley.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVE CTA -->
+<section class="team-cta">
+  <div class="team-cta__card">
+    <div>
+      <div class="team-cta__since">Get Involved</div>
+      <h2 class="team-cta__h2">Find your place to serve.</h2>
+      <p class="team-cta__desc">From welcome teams to worship, kids ministry to tech — there's a place to use your gifts and grow alongside an amazing team.</p>
+      <a href="contact.html" class="btn-white">I'd like to serve →</a>
+    </div>
+    <div class="team-cta__img">
+      <div class="img-placeholder"><span>team in action</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__grid">
+    <div>
+      <div class="footer__logo">
+        <div class="nav__logo-mark"><span>W</span></div>
+        <div class="footer__brand">Wembley Christian Centre</div>
+      </div>
+      <p class="footer__tagline">Reach Out · Restore · Release. A vibrant, Spirit-filled church family in the heart of Wembley.</p>
+      <div class="footer__socials">
+        <a href="#" class="footer__social">FB</a><a href="#" class="footer__social">IG</a>
+        <a href="#" class="footer__social">YT</a><a href="#" class="footer__social">X</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer__col-title">Explore</div>
+      <a href="about.html" class="footer__col-link">About</a>
+      <a href="services.html" class="footer__col-link">What's On</a>
+      <a href="events.html" class="footer__col-link">Events</a>
+      <a href="sermons.html" class="footer__col-link">Sermons</a>
+    </div>
+    <div>
+      <div class="footer__col-title">Connect</div>
+      <a href="team.html" class="footer__col-link">Team</a>
+      <a href="life-groups.html" class="footer__col-link">Life Groups</a>
+      <a href="contact.html" class="footer__col-link">Contact</a>
+    </div>
+    <div>
+      <div class="footer__col-title">Visit</div>
+      <div class="footer__address">Wembley, London<br>Sundays · 11:00 AM<br>hello@wembleychristiancentre.org.uk</div>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="footer__copy">© 2026 Wembley Christian Centre · All Rights Reserved</div>
+    <div class="footer__copy">Reach Out · Restore · Release</div>
+  </div>
+</footer>
+
+</body>
+</html>

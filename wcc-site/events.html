@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events — Wembley Christian Centre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    .filter-section { padding: 48px 48px 0; max-width: 1280px; margin: 0 auto; }
+
+    /* Featured */
+    .featured-section { padding: 40px 48px 0; max-width: 1280px; margin: 0 auto; }
+    .featured-label { font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 20px; }
+    .featured-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .feat-card { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 24px rgba(26,140,232,0.08); border: 1px solid #EEF2F8; }
+    .feat-card__img { position: relative; height: 200px; }
+    .feat-card__img .img-placeholder { position: absolute; inset: 0; height: 100%; background: repeating-linear-gradient(135deg,#c4dbef 0,#c4dbef 1px,#e8f0f7 0,#e8f0f7 8px); }
+    .feat-card__date-badge { position: absolute; top: 14px; left: 14px; color: #fff; border-radius: 8px; padding: 10px 14px; text-align: center; min-width: 60px; }
+    .feat-card__date-num { font-size: 20px; font-weight: 900; line-height: 1; }
+    .feat-card__date-mon { font-size: 10px; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.05em; }
+    .feat-card__tag-badge { position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,0.95); font-size: 10px; font-weight: 800; padding: 5px 12px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .feat-card__body { padding: 24px 28px; }
+    .feat-card__title { font-size: 20px; font-weight: 800; color: var(--dark); margin-bottom: 8px; }
+    .feat-card__time { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+    .feat-card__desc { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 16px; }
+    .feat-card__link { font-size: 13px; font-weight: 800; color: var(--blue); }
+
+    /* Event List */
+    .events-list-section { padding: 60px 48px 80px; max-width: 1280px; margin: 0 auto; }
+    .events-list { display: flex; flex-direction: column; gap: 12px; }
+    .event-row {
+      display: flex; align-items: center; gap: 24px; padding: 24px 32px;
+      background: #fff; border-radius: 16px; border: 1px solid #EEF2F8;
+    }
+    .event-row[data-tag]:not([data-tag="hidden"]) { display: flex; }
+    .event-row.hidden { display: none; }
+    .event-row__badge { min-width: 72px; text-align: center; border-radius: 12px; padding: 14px 8px; }
+    .event-row__badge-num { font-size: 22px; font-weight: 900; color: #fff; line-height: 1; }
+    .event-row__badge-mon { font-size: 11px; color: rgba(255,255,255,0.85); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+    .event-row__info { flex: 1; }
+    .event-row__meta { display: flex; gap: 10px; align-items: center; margin-bottom: 6px; }
+    .event-row__tag { background: var(--blue-soft); color: var(--blue); font-size: 10px; font-weight: 800; padding: 3px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .event-row__when { font-size: 12px; color: var(--muted); font-weight: 600; }
+    .event-row__title { font-size: 18px; font-weight: 800; color: var(--dark); margin-bottom: 4px; }
+    .event-row__desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .event-row__btn { background: var(--blue-soft); color: var(--blue); border: none; border-radius: 50px; padding: 10px 20px; font-family: var(--font); font-weight: 700; font-size: 13px; cursor: pointer; white-space: nowrap; }
+
+    @media (max-width: 1024px) { .featured-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 768px) {
+      .filter-section, .featured-section, .events-list-section { padding: 40px 24px; }
+      .featured-grid { grid-template-columns: 1fr; }
+      .event-row { flex-wrap: wrap; gap: 14px; padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="img-placeholder page-hero__bg" style="background-image: repeating-linear-gradient(135deg,#a8c8e6 0,#a8c8e6 1px,#dce8f3 0,#dce8f3 8px);">
+    <span>events page hero</span>
+  </div>
+  <div class="page-hero__overlay"></div>
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">
+      <div class="nav__logo-mark"><span>W</span></div>
+      <span class="nav__logo-name">Wembley Christian Centre</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">What's On</a></li>
+      <li><a href="events.html" class="active">Events</a></li>
+      <li><a href="sermons.html">Sermons</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="life-groups.html">Life Groups</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="services.html" class="nav__cta">Plan a Visit ↗</a>
+  </nav>
+  <div class="page-hero__content">
+    <div class="page-hero__badge">✦ Events</div>
+    <h1 class="page-hero__h1">Something is always happening.</h1>
+    <p class="page-hero__sub">From weekly gatherings to special celebrations — find your next moment to connect.</p>
+  </div>
+  <div class="curve-divider">
+    <svg viewBox="0 0 1280 60" preserveAspectRatio="none"><path d="M0,60 C320,0 960,0 1280,60 L1280,60 L0,60Z" fill="#FAFBFF"/></svg>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<section class="filter-section">
+  <div class="filter-bar" id="filterBar">
+    <button class="filter-btn active" data-filter="All">All</button>
+    <button class="filter-btn" data-filter="Weekly">Weekly</button>
+    <button class="filter-btn" data-filter="Special">Special</button>
+    <button class="filter-btn" data-filter="Outreach">Outreach</button>
+    <button class="filter-btn" data-filter="Youth">Youth</button>
+    <button class="filter-btn" data-filter="Family">Family</button>
+    <button class="filter-btn" data-filter="Ministry">Ministry</button>
+  </div>
+</section>
+
+<!-- FEATURED EVENTS -->
+<section class="featured-section" id="featuredSection">
+  <div class="featured-label">✦ Featured</div>
+  <div class="featured-grid">
+
+    <div class="feat-card">
+      <div class="feat-card__img">
+        <div class="img-placeholder"><span>event banner</span></div>
+        <div class="feat-card__date-badge" style="background:#1A8CE8;">
+          <div class="feat-card__date-num">18</div><div class="feat-card__date-mon">May</div>
+        </div>
+        <div class="feat-card__tag-badge" style="color:#1A8CE8;">Weekly</div>
+      </div>
+      <div class="feat-card__body">
+        <div class="feat-card__title">Sunday Celebrations</div>
+        <div class="feat-card__time" style="color:#1A8CE8;">Sun · 11:00 AM</div>
+        <p class="feat-card__desc">Our weekly main gathering.</p>
+        <a href="#" class="feat-card__link">More info →</a>
+      </div>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-card__img">
+        <div class="img-placeholder"><span>event banner</span></div>
+        <div class="feat-card__date-badge" style="background:#F07D3A;">
+          <div class="feat-card__date-num">23</div><div class="feat-card__date-mon">May</div>
+        </div>
+        <div class="feat-card__tag-badge" style="color:#F07D3A;">Special</div>
+      </div>
+      <div class="feat-card__body">
+        <div class="feat-card__title">Night of Worship</div>
+        <div class="feat-card__time" style="color:#1A8CE8;">Fri · 7:30 PM</div>
+        <p class="feat-card__desc">An evening of extended worship and prayer with our worship team.</p>
+        <a href="#" class="feat-card__link">More info →</a>
+      </div>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-card__img">
+        <div class="img-placeholder"><span>event banner</span></div>
+        <div class="feat-card__date-badge" style="background:#0D1B2A;">
+          <div class="feat-card__date-num">30</div><div class="feat-card__date-mon">May</div>
+        </div>
+        <div class="feat-card__tag-badge" style="color:#0D1B2A;">Outreach</div>
+      </div>
+      <div class="feat-card__body">
+        <div class="feat-card__title">Community Outreach</div>
+        <div class="feat-card__time" style="color:#1A8CE8;">Sat · 10:00 AM</div>
+        <p class="feat-card__desc">Serving the streets of Wembley with food, prayer and friendship.</p>
+        <a href="#" class="feat-card__link">More info →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EVENT LIST -->
+<section class="events-list-section">
+  <div class="section-head">
+    <div class="section-head__kicker">
+      <div class="section-head__kicker-dot"></div>
+      <span class="section-head__kicker-text" id="listKicker">Full Calendar</span>
+    </div>
+    <h2 class="section-head__h2" id="listTitle">All Upcoming Events</h2>
+  </div>
+  <div class="events-list" id="eventsList">
+
+    <div class="event-row" data-tag="Weekly">
+      <div class="event-row__badge" style="background:#1A8CE8;">
+        <div class="event-row__badge-num">18</div><div class="event-row__badge-mon">May</div>
+      </div>
+      <div class="event-row__info">
+        <div class="event-row__meta">
+          <span class="event-row__tag">Weekly</span>
+          <span class="event-row__when">Sun · 11:00 AM</span>
+        </div>
+        <div class="event-row__title">Sunday Celebrations</div>
+        <p class="event-row__desc">Our weekly main gathering.</p>
+      </div>
+      <button class="event-row__btn">Details →</button>
+    </div>
+
+    <div class="event-row" data-tag="Special">
+      <div class="event-row__badge" style="background:#F07D3A;">
+        <div class="event-row__badge-num">23</div><div class="event-row__badge-mon">May</div>
+      </div>
+      <div class="event-row__info">
+        <div class="event-row__meta">
+          <span class="event-row__tag">Special</span>
+          <span class="event-row__when">Fri · 7:30 PM</span>
+        </div>
+        <div class="event-row__title">Night of Worship</div>
+        <p class="event-row__desc">An evening of extended worship and prayer with our worship team.</p>
+      </div>
+      <button class="event-row__btn">Details →</button>
+    </div>
+
+    <div class="event-row" data-tag="Outreach">
+      <div class="event-row__badge" style="background:#0D1B2A;">
+        <div class="event-row__badge-num">30</div><div class="event-row__badge-mon">May</div>
+      </div>
+      <div class="event-row__info">
+        <div class="event-row__meta">
+          <span class="event-row__tag">Outreach</span>
+          <span class="event-row__when">Sat · 10:00 AM</span>
+        </div>
+        <div class="event-row__title">Community Outreach</div>
+        <p class="event-row__desc">Serving the streets of Wembley with food, prayer and friendship.</p>
+      </div>
+      <button class="event-row__btn">Details →</button>
+    </div>
+
+    <div class="event-row" data-tag="Weekly">
+      <div class="event-row__badge" style="background:#1A8CE8;">
+        <div class="event-row__badge-num">6</div><div class="event-row__badge-mon">Jun</div>
+      </div>
+      <div class="event-row__info">
+        <div class="event-row__meta">
+          <span class="event-row__tag">Weekly</span>
+          <span class="event-row__when">Fri · 7:30 PM</span>
+        </div>
+        <div class="event-row__title">Prayer Meeting</div>
+        <p class="event-row__desc">Weekly corporate prayer.</p>
+      </div>
+      <button class="event-row__btn">Details →</button>
+    </div>
+
+    <div class="event-row" data-tag="Special">
+      <div class="event-row__badge" style="background:#F07D3A;">
+        <div class="event-row__badge-num">8</div><div class="event-row__badge-mon">Jun</div>
+      </div>
+      <div class="event-row__info">
+        <div class="event-row__meta">
+          <span class="event-row__tag">Special</span>
+          <span class="event-row__when">Sun · 11:00 AM</span>
+        </div>
+        <div class="event-row__title">Pentecost Sunday</div>
+        <p class="event-row__desc">Celebrating the gift of the Holy Spirit — a special service for the whole church.</p>
+      </div>
+      <button class="event-row__btn">Details →</button>
+    </div>
+
+    <div class="event-row" data-tag="Youth">
+      <div class="event-row__badge" style="background:#7C3AED;">
+        <div class="event-row__badge-num">13</div><div class="event-row__badge-mon">Jun</div>
+      </div>
+      <div class="event-row__info">
+        <div class="event-row__meta">
+          <span class="event-row__tag" style="color:#7C3AED;">Youth</span>
+          <span class="event-row__when">Fri · 7:00 PM</span>
+        </div>
+        <div class="event-row__title">Youth Event</div>
+        <p class="event-row__desc">Games, food, worship and message — for ages 11–18.</p>
+      </div>
+      <button class="event-row__btn">Details →</button>
+    </div>
+
+    <div class="event-row" data-tag="Family">
+      <div class="event-row__badge" style="background:#1A8CE8;">
+        <div class="event-row__badge-num">15</div><div class="event-row__badge-mon">Jun</div>
+      </div>
+      <div class="event-row__info">
+        <div class="event-row__meta">
+          <span class="event-row__tag">Family</span>
+          <span class="event-row__when">Sun · 11:00 AM</span>
+        </div>
+        <div class="event-row__title">Father's Day Service</div>
+        <p class="event-row__desc">Honouring fathers and father figures in our church family.</p>
+      </div>
+      <button class="event-row__btn">Details →</button>
+    </div>
+
+    <div class="event-row" data-tag="Ministry">
+      <div class="event-row__badge" style="background:#0D1B2A;">
+        <div class="event-row__badge-num">21</div><div class="event-row__badge-mon">Jun</div>
+      </div>
+      <div class="event-row__info">
+        <div class="event-row__meta">
+          <span class="event-row__tag">Ministry</span>
+          <span class="event-row__when">Sat · 9:30 AM</span>
+        </div>
+        <div class="event-row__title">Men's Breakfast</div>
+        <p class="event-row__desc">A morning of food, fellowship and faith for the men of WCC.</p>
+      </div>
+      <button class="event-row__btn">Details →</button>
+    </div>
+
+    <div class="event-row" data-tag="Special">
+      <div class="event-row__badge" style="background:#F07D3A;">
+        <div class="event-row__badge-num">28</div><div class="event-row__badge-mon">Jun</div>
+      </div>
+      <div class="event-row__info">
+        <div class="event-row__meta">
+          <span class="event-row__tag">Special</span>
+          <span class="event-row__when">Sat · 2:00 PM</span>
+        </div>
+        <div class="event-row__title">Baptism Sunday</div>
+        <p class="event-row__desc">Celebrating those publicly declaring their faith in Jesus.</p>
+      </div>
+      <button class="event-row__btn">Details →</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__grid">
+    <div>
+      <div class="footer__logo">
+        <div class="nav__logo-mark"><span>W</span></div>
+        <div class="footer__brand">Wembley Christian Centre</div>
+      </div>
+      <p class="footer__tagline">Reach Out · Restore · Release. A vibrant, Spirit-filled church family in the heart of Wembley.</p>
+      <div class="footer__socials">
+        <a href="#" class="footer__social">FB</a><a href="#" class="footer__social">IG</a>
+        <a href="#" class="footer__social">YT</a><a href="#" class="footer__social">X</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer__col-title">Explore</div>
+      <a href="about.html" class="footer__col-link">About</a>
+      <a href="services.html" class="footer__col-link">What's On</a>
+      <a href="events.html" class="footer__col-link">Events</a>
+      <a href="sermons.html" class="footer__col-link">Sermons</a>
+    </div>
+    <div>
+      <div class="footer__col-title">Connect</div>
+      <a href="team.html" class="footer__col-link">Team</a>
+      <a href="life-groups.html" class="footer__col-link">Life Groups</a>
+      <a href="contact.html" class="footer__col-link">Contact</a>
+    </div>
+    <div>
+      <div class="footer__col-title">Visit</div>
+      <div class="footer__address">Wembley, London<br>Sundays · 11:00 AM<br>hello@wembleychristiancentre.org.uk</div>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="footer__copy">© 2026 Wembley Christian Centre · All Rights Reserved</div>
+    <div class="footer__copy">Reach Out · Restore · Release</div>
+  </div>
+</footer>
+
+<script>
+  const filterBar = document.getElementById('filterBar');
+  const featuredSection = document.getElementById('featuredSection');
+  const rows = document.querySelectorAll('.event-row');
+  const listKicker = document.getElementById('listKicker');
+  const listTitle = document.getElementById('listTitle');
+
+  filterBar.addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    const f = btn.dataset.filter;
+    filterBar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    featuredSection.style.display = f === 'All' ? '' : 'none';
+    rows.forEach(row => {
+      row.classList.toggle('hidden', f !== 'All' && row.dataset.tag !== f);
+    });
+    listKicker.textContent = f === 'All' ? 'Full Calendar' : f;
+    listTitle.textContent = f === 'All' ? 'All Upcoming Events' : f + ' Events';
+  });
+</script>
+</body>
+</html>

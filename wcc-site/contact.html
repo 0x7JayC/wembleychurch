@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Wembley Christian Centre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    /* Contact layout */
+    .contact-section { padding: 80px 48px; max-width: 1280px; margin: 0 auto; }
+    .contact-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; }
+
+    /* Form card */
+    .form-card { background: #fff; border-radius: 24px; padding: 44px; border: 1px solid #EEF2F8; }
+    .reason-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+    .reason-btn {
+      background: #fff; color: var(--muted); border: 1.5px solid #E0E8F2;
+      border-radius: 50px; padding: 8px 16px; font-family: var(--font); font-weight: 700; font-size: 13px;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .reason-btn.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-field { margin-bottom: 16px; }
+    .form-label { font-size: 12px; font-weight: 700; color: var(--dark); display: block; margin-bottom: 6px; }
+    .form-input {
+      width: 100%; padding: 12px 14px; border: 1.5px solid #E0E8F2; border-radius: 10px;
+      font-size: 14px; font-family: var(--font); color: var(--dark);
+      transition: border-color 0.15s;
+    }
+    .form-input:focus { border-color: var(--blue); }
+    .form-textarea { resize: vertical; min-height: 130px; }
+    .form-submit {
+      background: var(--blue); color: #fff; border: none; border-radius: 12px;
+      padding: 14px 32px; font-family: var(--font); font-weight: 700; font-size: 15px;
+      cursor: pointer; width: 100%;
+    }
+    .form-submit:hover { background: var(--blue-dark); }
+    .form-note { font-size: 12px; color: var(--muted); text-align: center; margin-top: 14px; }
+
+    /* Sidebar */
+    .contact-sidebar { display: flex; flex-direction: column; gap: 16px; }
+    .visit-card {
+      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+      color: #fff; border-radius: 20px; padding: 32px; position: relative; overflow: hidden;
+    }
+    .visit-card::before {
+      content: ''; position: absolute; top: -60px; right: -60px;
+      width: 180px; height: 180px; border-radius: 50%; background: rgba(255,255,255,0.08);
+    }
+    .visit-card__inner { position: relative; }
+    .visit-card__icon { font-size: 24px; margin-bottom: 12px; }
+    .visit-card__label { font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; margin-bottom: 8px; }
+    .visit-card__name { font-size: 18px; font-weight: 800; line-height: 1.4; margin-bottom: 14px; }
+    .visit-card__times { font-size: 13px; opacity: 0.85; line-height: 1.6; margin-bottom: 18px; }
+    .visit-card__btn {
+      background: rgba(255,255,255,0.18); color: #fff; border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 10px; padding: 9px 18px; font-family: var(--font); font-weight: 700; font-size: 13px;
+      display: inline-block;
+    }
+    .info-card { background: #fff; border-radius: 20px; padding: 28px; border: 1px solid #EEF2F8; }
+    .info-card__icon { font-size: 24px; margin-bottom: 10px; }
+    .info-card__label { font-size: 11px; font-weight: 800; color: var(--blue); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
+    .info-card__val { font-size: 15px; font-weight: 700; color: var(--dark); word-break: break-all; }
+    .info-card__sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .social-row { display: flex; gap: 10px; }
+    .social-icon {
+      width: 44px; height: 44px; border-radius: 10px; background: var(--blue-soft); color: var(--blue);
+      display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; cursor: pointer;
+    }
+    .social-icon:hover { background: var(--blue); color: #fff; }
+
+    /* Map */
+    .map-section { padding: 0 48px 80px; max-width: 1280px; margin: 0 auto; }
+    .map-wrap { position: relative; height: 420px; border-radius: 24px; overflow: hidden; }
+    .map-wrap .img-placeholder { height: 100%; background: repeating-linear-gradient(135deg,#b8d4ec 0,#b8d4ec 1px,#dce8f3 0,#dce8f3 8px); }
+    .map-pin-card {
+      position: absolute; bottom: 28px; left: 28px;
+      background: #fff; border-radius: 16px; padding: 24px 28px;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.12); max-width: 320px;
+    }
+    .map-pin-card__label { font-size: 11px; font-weight: 800; color: var(--blue); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
+    .map-pin-card__name { font-size: 18px; font-weight: 800; color: var(--dark); margin-bottom: 6px; }
+    .map-pin-card__addr { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+    .map-pin-card__btn {
+      background: var(--blue); color: #fff; border-radius: 10px; padding: 9px 18px;
+      font-family: var(--font); font-weight: 700; font-size: 13px; display: inline-block;
+    }
+
+    @media (max-width: 1024px) {
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .contact-section, .map-section { padding: 40px 24px; }
+      .form-card { padding: 28px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="img-placeholder page-hero__bg" style="background-image: repeating-linear-gradient(135deg,#a8c8e6 0,#a8c8e6 1px,#dce8f3 0,#dce8f3 8px);">
+    <span>contact page hero</span>
+  </div>
+  <div class="page-hero__overlay"></div>
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">
+      <div class="nav__logo-mark"><span>W</span></div>
+      <span class="nav__logo-name">Wembley Christian Centre</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">What's On</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="sermons.html">Sermons</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="life-groups.html">Life Groups</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <a href="services.html" class="nav__cta">Plan a Visit ↗</a>
+  </nav>
+  <div class="page-hero__content">
+    <div class="page-hero__badge">✦ Contact</div>
+    <h1 class="page-hero__h1">We'd love to hear from you.</h1>
+    <p class="page-hero__sub">Whether you're planning a visit, need prayer, or just want to say hello — drop us a message.</p>
+  </div>
+  <div class="curve-divider">
+    <svg viewBox="0 0 1280 60" preserveAspectRatio="none"><path d="M0,60 C320,0 960,0 1280,60 L1280,60 L0,60Z" fill="#FAFBFF"/></svg>
+  </div>
+</section>
+
+<!-- CONTACT FORM + SIDEBAR -->
+<section class="contact-section">
+  <div class="contact-grid">
+
+    <!-- FORM -->
+    <div class="form-card">
+      <div class="section-head">
+        <div class="section-head__kicker">
+          <div class="section-head__kicker-dot"></div>
+          <span class="section-head__kicker-text">Get in Touch</span>
+        </div>
+        <h2 class="section-head__h2" style="font-size:clamp(26px,3vw,38px);">Send us a message</h2>
+      </div>
+      <div style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:12px;margin-top:24px;">I'd like to...</div>
+      <div class="reason-row" id="reasonBar">
+        <button class="reason-btn active">Plan a visit</button>
+        <button class="reason-btn">Prayer request</button>
+        <button class="reason-btn">Join a Life Group</button>
+        <button class="reason-btn">Get involved</button>
+        <button class="reason-btn">Pastoral support</button>
+        <button class="reason-btn">Something else</button>
+      </div>
+      <form>
+        <div class="form-row">
+          <div>
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-input" placeholder="Jane">
+          </div>
+          <div>
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-input" placeholder="Doe">
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" placeholder="you@email.com">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Phone (optional)</label>
+          <input type="tel" class="form-input" placeholder="07...">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Your Message</label>
+          <textarea class="form-input form-textarea" placeholder="Tell us a bit about why you're getting in touch..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Message →</button>
+        <p class="form-note">We respond within 48 hours, usually much sooner.</p>
+      </form>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="contact-sidebar">
+
+      <div class="visit-card">
+        <div class="visit-card__inner">
+          <div class="visit-card__icon">📍</div>
+          <div class="visit-card__label">Visit Us</div>
+          <div class="visit-card__name">Wembley Christian Centre<br>Wembley, London</div>
+          <div class="visit-card__times">Sundays · 11:00 AM<br>Doors open 10:45 AM</div>
+          <a href="#map" class="visit-card__btn">Get Directions →</a>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card__icon">📧</div>
+        <div class="info-card__label">Email</div>
+        <a href="mailto:hello@wembleychristiancentre.org.uk" class="info-card__val">hello@wembleychristiancentre.org.uk</a>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card__icon">📞</div>
+        <div class="info-card__label">Call</div>
+        <div class="info-card__val">020 0000 0000</div>
+        <div class="info-card__sub">Mon–Fri, 9am–5pm</div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card__label" style="margin-bottom:14px;">Follow Us</div>
+        <div class="social-row">
+          <a href="#" class="social-icon">FB</a>
+          <a href="#" class="social-icon">IG</a>
+          <a href="#" class="social-icon">YT</a>
+          <a href="#" class="social-icon">X</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="map-section" id="map">
+  <div class="section-head">
+    <div class="section-head__kicker">
+      <div class="section-head__kicker-dot"></div>
+      <span class="section-head__kicker-text">Find Us</span>
+    </div>
+    <h2 class="section-head__h2">Right in the heart of Wembley</h2>
+  </div>
+  <div class="map-wrap">
+    <div class="img-placeholder" style="height:100%;"><span>Map of Wembley · embed Google Maps here</span></div>
+    <div class="map-pin-card">
+      <div class="map-pin-card__label">📍 WCC</div>
+      <div class="map-pin-card__name">Wembley Christian Centre</div>
+      <p class="map-pin-card__addr">Wembley, London<br>Nearest tube: Wembley Park / Wembley Central</p>
+      <a href="https://maps.google.com/?q=Wembley+Christian+Centre" target="_blank" rel="noopener" class="map-pin-card__btn">Open in Maps →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__grid">
+    <div>
+      <div class="footer__logo">
+        <div class="nav__logo-mark"><span>W</span></div>
+        <div class="footer__brand">Wembley Christian Centre</div>
+      </div>
+      <p class="footer__tagline">Reach Out · Restore · Release. A vibrant, Spirit-filled church family in the heart of Wembley.</p>
+      <div class="footer__socials">
+        <a href="#" class="footer__social">FB</a><a href="#" class="footer__social">IG</a>
+        <a href="#" class="footer__social">YT</a><a href="#" class="footer__social">X</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer__col-title">Explore</div>
+      <a href="about.html" class="footer__col-link">About</a>
+      <a href="services.html" class="footer__col-link">What's On</a>
+      <a href="events.html" class="footer__col-link">Events</a>
+      <a href="sermons.html" class="footer__col-link">Sermons</a>
+    </div>
+    <div>
+      <div class="footer__col-title">Connect</div>
+      <a href="team.html" class="footer__col-link">Team</a>
+      <a href="life-groups.html" class="footer__col-link">Life Groups</a>
+      <a href="contact.html" class="footer__col-link">Contact</a>
+    </div>
+    <div>
+      <div class="footer__col-title">Visit</div>
+      <div class="footer__address">Wembley, London<br>Sundays · 11:00 AM<br>hello@wembleychristiancentre.org.uk</div>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="footer__copy">© 2026 Wembley Christian Centre · All Rights Reserved</div>
+    <div class="footer__copy">Reach Out · Restore · Release</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('reasonBar').addEventListener('click', e => {
+    const btn = e.target.closest('.reason-btn');
+    if (!btn) return;
+    document.querySelectorAll('.reason-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+</script>
+</body>
+</html>

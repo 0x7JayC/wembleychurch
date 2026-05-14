@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Life Groups — Wembley Christian Centre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    /* Why */
+    .why-section { padding: 80px 48px 40px; max-width: 1280px; margin: 0 auto; }
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px; }
+    .why-card { background: #fff; border-radius: 20px; padding: 32px 28px; border: 1px solid #EEF2F8; }
+    .why-card__num { font-size: 44px; font-weight: 900; color: var(--blue); line-height: 1; margin-bottom: 18px; letter-spacing: -1px; }
+    .why-card__title { font-size: 20px; font-weight: 800; color: var(--dark); margin-bottom: 10px; letter-spacing: -0.3px; }
+    .why-card__desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+    /* How it works */
+    .how-section { padding: 60px 48px; max-width: 1280px; margin: 0 auto; }
+    .how-card {
+      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+      border-radius: 24px; padding: 52px; color: #fff;
+    }
+    .how-inner { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: center; }
+    .how-label { font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; margin-bottom: 14px; }
+    .how-title { font-size: clamp(28px, 3.5vw, 42px); font-weight: 800; line-height: 1.1; letter-spacing: -0.5px; }
+    .how-steps { display: flex; flex-direction: column; gap: 18px; }
+    .how-step { display: flex; gap: 18px; align-items: flex-start; }
+    .how-step__num {
+      width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+      display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800;
+    }
+    .how-step__title { font-size: 17px; font-weight: 800; margin-bottom: 4px; }
+    .how-step__desc { font-size: 14px; opacity: 0.8; line-height: 1.6; }
+
+    /* Groups Grid */
+    .groups-section { padding: 60px 48px 80px; max-width: 1280px; margin: 0 auto; }
+    .groups-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .group-card { background: #fff; border-radius: 20px; padding: 28px; border: 1px solid #EEF2F8; position: relative; }
+    .group-card__spots {
+      position: absolute; top: 18px; right: 18px;
+      font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .group-card__spots--open { background: #E8F8EE; color: #1F8A5B; }
+    .group-card__spots--limited { background: #FFF4E5; color: #C77B1A; }
+    .group-card__area { font-size: 11px; font-weight: 800; color: var(--blue); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+    .group-card__name { font-size: 22px; font-weight: 800; color: var(--dark); margin-bottom: 14px; letter-spacing: -0.3px; }
+    .group-card__details { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #EEF2F8; }
+    .group-card__row { display: flex; justify-content: space-between; font-size: 13px; }
+    .group-card__row-label { color: var(--muted); font-weight: 600; }
+    .group-card__row-val { color: var(--dark); font-weight: 700; }
+    .group-card__btn { background: var(--blue-soft); color: var(--blue); border: none; border-radius: 10px; padding: 11px 20px; font-family: var(--font); font-weight: 700; font-size: 13px; cursor: pointer; width: 100%; }
+    .group-card__btn:hover { background: var(--blue); color: #fff; }
+
+    /* Can't find CTA */
+    .cant-find { padding: 0 48px 80px; max-width: 1280px; margin: 0 auto; }
+    .cant-find__card { background: var(--blue-soft); border-radius: 24px; padding: 44px; text-align: center; }
+    .cant-find__h2 { font-size: 26px; font-weight: 800; color: var(--dark); margin-bottom: 12px; letter-spacing: -0.5px; }
+    .cant-find__desc { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 480px; margin: 0 auto 24px; }
+
+    @media (max-width: 1024px) {
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .how-inner { grid-template-columns: 1fr; gap: 40px; }
+      .groups-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .why-section, .how-section, .groups-section, .cant-find { padding: 40px 24px; }
+      .why-grid { grid-template-columns: 1fr; }
+      .how-card { padding: 32px 24px; }
+      .groups-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="img-placeholder page-hero__bg" style="background-image: repeating-linear-gradient(135deg,#a8c8e6 0,#a8c8e6 1px,#dce8f3 0,#dce8f3 8px);">
+    <span>life groups page hero</span>
+  </div>
+  <div class="page-hero__overlay"></div>
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">
+      <div class="nav__logo-mark"><span>W</span></div>
+      <span class="nav__logo-name">Wembley Christian Centre</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">What's On</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="sermons.html">Sermons</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="life-groups.html" class="active">Life Groups</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="services.html" class="nav__cta">Plan a Visit ↗</a>
+  </nav>
+  <div class="page-hero__content">
+    <div class="page-hero__badge">✦ Life Groups</div>
+    <h1 class="page-hero__h1">Don't do life alone.</h1>
+    <p class="page-hero__sub">Small communities of faith meeting weekly across Wembley — for friendship, prayer, study and growth.</p>
+  </div>
+  <div class="curve-divider">
+    <svg viewBox="0 0 1280 60" preserveAspectRatio="none"><path d="M0,60 C320,0 960,0 1280,60 L1280,60 L0,60Z" fill="#FAFBFF"/></svg>
+  </div>
+</section>
+
+<!-- WHY LIFE GROUPS -->
+<section class="why-section">
+  <div class="section-head section-head--center">
+    <div class="section-head__kicker">
+      <div class="section-head__kicker-dot"></div>
+      <span class="section-head__kicker-text">Why Life Groups</span>
+    </div>
+    <h2 class="section-head__h2">Where life-on-life happens.</h2>
+    <p class="section-head__subtitle">Sundays are about gathering; Life Groups are about belonging. The best of WCC happens around dinner tables, in living rooms, in real life.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-card__num">01</div>
+      <div class="why-card__title">Real Connection</div>
+      <p class="why-card__desc">Build deep, lasting friendships with people who walk with you through every season.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-card__num">02</div>
+      <div class="why-card__title">Spiritual Growth</div>
+      <p class="why-card__desc">Dig into the Bible together, pray for one another, and grow in your faith.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-card__num">03</div>
+      <div class="why-card__title">Practical Support</div>
+      <p class="why-card__desc">When life happens — joy or struggle — your Life Group is there with you.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="how-card">
+    <div class="how-inner">
+      <div>
+        <div class="how-label">How It Works</div>
+        <div class="how-title">Simple, warm, and life-giving.</div>
+      </div>
+      <div class="how-steps">
+        <div class="how-step">
+          <div class="how-step__num">1</div>
+          <div>
+            <div class="how-step__title">Find a Group</div>
+            <p class="how-step__desc">Browse groups by area, focus or schedule below.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-step__num">2</div>
+          <div>
+            <div class="how-step__title">Get in Touch</div>
+            <p class="how-step__desc">Message the host — they'll welcome you in.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-step__num">3</div>
+          <div>
+            <div class="how-step__title">Show Up</div>
+            <p class="how-step__desc">Just come. Bring yourself, an open heart, maybe a snack.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-step__num">4</div>
+          <div>
+            <div class="how-step__title">Keep Coming</div>
+            <p class="how-step__desc">Most groups meet weekly. You'll quickly find your people.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FIND A GROUP -->
+<section class="groups-section">
+  <div class="section-head">
+    <div class="section-head__kicker">
+      <div class="section-head__kicker-dot"></div>
+      <span class="section-head__kicker-text">Find Your Group</span>
+    </div>
+    <h2 class="section-head__h2">Life Groups Across Wembley</h2>
+  </div>
+  <div class="groups-grid">
+
+    <div class="group-card">
+      <span class="group-card__spots group-card__spots--open">Open</span>
+      <div class="group-card__area">📍 Wembley</div>
+      <div class="group-card__name">Wembley Central</div>
+      <div class="group-card__details">
+        <div class="group-card__row"><span class="group-card__row-label">When</span><span class="group-card__row-val">Thursdays, 7:30 PM</span></div>
+        <div class="group-card__row"><span class="group-card__row-label">Host</span><span class="group-card__row-val">David &amp; Sarah</span></div>
+        <div class="group-card__row"><span class="group-card__row-label">Focus</span><span class="group-card__row-val">Mixed Adults</span></div>
+      </div>
+      <button class="group-card__btn">Get in Touch →</button>
+    </div>
+
+    <div class="group-card">
+      <span class="group-card__spots group-card__spots--open">Open</span>
+      <div class="group-card__area">📍 Sudbury</div>
+      <div class="group-card__name">Sudbury Family</div>
+      <div class="group-card__details">
+        <div class="group-card__row"><span class="group-card__row-label">When</span><span class="group-card__row-val">Wednesdays, 7:00 PM</span></div>
+        <div class="group-card__row"><span class="group-card__row-label">Host</span><span class="group-card__row-val">Michael &amp; Grace</span></div>
+        <div class="group-card__row"><span class="group-card__row-label">Focus</span><span class="group-card__row-val">Families</span></div>
+      </div>
+      <button class="group-card__btn">Get in Touch →</button>
+    </div>
+
+    <div class="group-card">
+      <span class="group-card__spots group-card__spots--open">Open</span>
+      <div class="group-card__area">📍 Wembley Park</div>
+      <div class="group-card__name">Young Adults</div>
+      <div class="group-card__details">
+        <div class="group-card__row"><span class="group-card__row-label">When</span><span class="group-card__row-val">Fridays, 8:00 PM</span></div>
+        <div class="group-card__row"><span class="group-card__row-label">Host</span><span class="group-card__row-val">Joyce &amp; Daniel</span></div>
+        <div class="group-card__row"><span class="group-card__row-label">Focus</span><span class="group-card__row-val">Ages 18–30</span></div>
+      </div>
+      <button class="group-card__btn">Get in Touch →</button>
+    </div>
+
+    <div class="group-card">
+      <span class="group-card__spots group-card__spots--open">Open</span>
+      <div class="group-card__area">📍 Alperton</div>
+      <div class="group-card__name">Women of Faith</div>
+      <div class="group-card__details">
+        <div class="group-card__row"><span class="group-card__row-label">When</span><span class="group-card__row-val">Tuesdays, 10:00 AM</span></div>
+        <div class="group-card__row"><span class="group-card__row-label">Host</span><span class="group-card__row-val">Esther</span></div>
+        <div class="group-card__row"><span class="group-card__row-label">Focus</span><span class="group-card__row-val">Women</span></div>
+      </div>
+      <button class="group-card__btn">Get in Touch →</button>
+    </div>
+
+    <div class="group-card">
+      <span class="group-card__spots group-card__spots--open">Open</span>
+      <div class="group-card__area">📍 Harlesden</div>
+      <div class="group-card__name">Men's Brotherhood</div>
+      <div class="group-card__details">
+        <div class="group-card__row"><span class="group-card__row-label">When</span><span class="group-card__row-val">Saturdays, 8:30 AM</span></div>
+        <div class="group-card__row"><span class="group-card__row-label">Host</span><span class="group-card__row-val">James</span></div>
+        <div class="group-card__row"><span class="group-card__row-label">Focus</span><span class="group-card__row-val">Men</span></div>
+      </div>
+      <button class="group-card__btn">Get in Touch →</button>
+    </div>
+
+    <div class="group-card">
+      <span class="group-card__spots group-card__spots--limited">1 spot</span>
+      <div class="group-card__area">📍 Stonebridge</div>
+      <div class="group-card__name">Stonebridge Group</div>
+      <div class="group-card__details">
+        <div class="group-card__row"><span class="group-card__row-label">When</span><span class="group-card__row-val">Mondays, 7:30 PM</span></div>
+        <div class="group-card__row"><span class="group-card__row-label">Host</span><span class="group-card__row-val">Grace &amp; Tunde</span></div>
+        <div class="group-card__row"><span class="group-card__row-label">Focus</span><span class="group-card__row-val">Mixed Adults</span></div>
+      </div>
+      <button class="group-card__btn">Get in Touch →</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- CAN'T FIND CTA -->
+<section class="cant-find">
+  <div class="cant-find__card">
+    <h2 class="cant-find__h2">Can't find the right group?</h2>
+    <p class="cant-find__desc">New groups are forming all the time. Reach out and we'll help you find — or start — one.</p>
+    <a href="contact.html" class="btn-blue">Contact the Team →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__grid">
+    <div>
+      <div class="footer__logo">
+        <div class="nav__logo-mark"><span>W</span></div>
+        <div class="footer__brand">Wembley Christian Centre</div>
+      </div>
+      <p class="footer__tagline">Reach Out · Restore · Release. A vibrant, Spirit-filled church family in the heart of Wembley.</p>
+      <div class="footer__socials">
+        <a href="#" class="footer__social">FB</a><a href="#" class="footer__social">IG</a>
+        <a href="#" class="footer__social">YT</a><a href="#" class="footer__social">X</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer__col-title">Explore</div>
+      <a href="about.html" class="footer__col-link">About</a>
+      <a href="services.html" class="footer__col-link">What's On</a>
+      <a href="events.html" class="footer__col-link">Events</a>
+      <a href="sermons.html" class="footer__col-link">Sermons</a>
+    </div>
+    <div>
+      <div class="footer__col-title">Connect</div>
+      <a href="team.html" class="footer__col-link">Team</a>
+      <a href="life-groups.html" class="footer__col-link">Life Groups</a>
+      <a href="contact.html" class="footer__col-link">Contact</a>
+    </div>
+    <div>
+      <div class="footer__col-title">Visit</div>
+      <div class="footer__address">Wembley, London<br>Sundays · 11:00 AM<br>hello@wembleychristiancentre.org.uk</div>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="footer__copy">© 2026 Wembley Christian Centre · All Rights Reserved</div>
+    <div class="footer__copy">Reach Out · Restore · Release</div>
+  </div>
+</footer>
+
+</body>
+</html>

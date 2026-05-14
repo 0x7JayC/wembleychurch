@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sermons — Wembley Christian Centre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    /* Featured Sermon */
+    .featured-sermon { padding: 80px 48px 40px; max-width: 1280px; margin: 0 auto; }
+    .featured-card {
+      background: #fff; border-radius: 24px; overflow: hidden;
+      border: 1px solid #EEF2F8; display: grid; grid-template-columns: 1.4fr 1fr;
+    }
+    .featured-card__thumb {
+      position: relative; min-height: 380px; background: var(--dark);
+    }
+    .featured-card__thumb .img-placeholder {
+      position: absolute; inset: 0; height: 100%; opacity: 0.8;
+      background: repeating-linear-gradient(135deg,#7faedb 0,#7faedb 1px,#b0cce4 0,#b0cce4 8px);
+    }
+    .featured-card__thumb-overlay { position: absolute; inset: 0; background: linear-gradient(45deg, rgba(13,27,42,0.4), transparent); }
+    .featured-card__play {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    }
+    .play-btn {
+      width: 80px; height: 80px; border-radius: 50%; background: rgba(255,255,255,0.95);
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .play-btn__triangle {
+      margin-left: 6px; width: 0; height: 0;
+      border-left: 22px solid #1A8CE8;
+      border-top: 14px solid transparent;
+      border-bottom: 14px solid transparent;
+    }
+    .featured-card__duration {
+      position: absolute; bottom: 14px; left: 14px;
+      background: rgba(0,0,0,0.7); color: #fff; padding: 5px 10px;
+      border-radius: 4px; font-size: 12px; font-weight: 700;
+    }
+    .featured-card__body { padding: 44px 40px; display: flex; flex-direction: column; justify-content: center; }
+    .featured-card__badges { display: flex; gap: 8px; margin-bottom: 18px; }
+    .badge-orange { background: var(--orange); color: #fff; font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .badge-blue-soft { background: var(--blue-soft); color: var(--blue); font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .featured-card__title { font-size: clamp(28px, 3.5vw, 42px); font-weight: 800; color: var(--dark); line-height: 1.1; letter-spacing: -1px; margin-bottom: 16px; }
+    .featured-card__meta { font-size: 14px; color: var(--muted); margin-bottom: 8px; }
+    .featured-card__meta strong { color: var(--dark); }
+    .featured-card__scripture { font-size: 14px; color: var(--blue); font-weight: 700; margin-bottom: 28px; }
+    .featured-card__desc { font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 28px; }
+    .featured-card__btns { display: flex; gap: 10px; }
+    .btn-play { background: var(--blue); color: #fff; border: none; border-radius: 12px; padding: 13px 28px; font-family: var(--font); font-weight: 700; font-size: 14px; cursor: pointer; }
+    .btn-listen { background: var(--blue-soft); color: var(--blue); border: none; border-radius: 12px; padding: 13px 24px; font-family: var(--font); font-weight: 700; font-size: 14px; cursor: pointer; }
+    .btn-dl { background: #fff; color: var(--muted); border: 1.5px solid #E0E8F2; border-radius: 12px; padding: 13px 22px; font-family: var(--font); font-weight: 600; font-size: 14px; cursor: pointer; }
+
+    /* Series filter */
+    .series-filter { padding: 40px 48px 0; max-width: 1280px; margin: 0 auto; }
+    .series-filter__label { font-size: 13px; font-weight: 800; color: var(--dark); text-transform: uppercase; letter-spacing: 0.1em; margin-right: 8px; }
+
+    /* Archive grid */
+    .sermon-archive { padding: 40px 48px 80px; max-width: 1280px; margin: 0 auto; }
+    .archive-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .sermon-card { background: #fff; border-radius: 18px; overflow: hidden; border: 1px solid #EEF2F8; }
+    .sermon-card.hidden { display: none; }
+    .sermon-card__thumb { position: relative; height: 180px; background: var(--dark); }
+    .sermon-card__thumb .img-placeholder { position: absolute; inset: 0; height: 100%; opacity: 0.75; background: repeating-linear-gradient(135deg,#7faedb 0,#7faedb 1px,#b0cce4 0,#b0cce4 8px); }
+    .sermon-card__play-sm {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    }
+    .play-btn-sm { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,0.95); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .play-btn-sm__tri { margin-left: 4px; width: 0; height: 0; border-left: 14px solid #1A8CE8; border-top: 9px solid transparent; border-bottom: 9px solid transparent; }
+    .sermon-card__dur { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); color: #fff; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; }
+    .sermon-card__series { position: absolute; top: 10px; left: 10px; background: rgba(255,255,255,0.95); color: var(--blue); font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .sermon-card__body { padding: 20px 22px; }
+    .sermon-card__title { font-size: 17px; font-weight: 800; color: var(--dark); margin-bottom: 8px; letter-spacing: -0.3px; line-height: 1.3; }
+    .sermon-card__speaker { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+    .sermon-card__foot { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #8AA0B5; }
+    .sermon-card__scripture { color: var(--blue); font-weight: 700; }
+
+    @media (max-width: 1024px) {
+      .featured-card { grid-template-columns: 1fr; }
+      .featured-card__thumb { min-height: 280px; }
+      .archive-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .featured-sermon, .series-filter, .sermon-archive { padding: 40px 24px; }
+      .archive-grid { grid-template-columns: 1fr; }
+      .featured-card__body { padding: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="img-placeholder page-hero__bg" style="background-image: repeating-linear-gradient(135deg,#a8c8e6 0,#a8c8e6 1px,#dce8f3 0,#dce8f3 8px);">
+    <span>sermons page hero</span>
+  </div>
+  <div class="page-hero__overlay"></div>
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">
+      <div class="nav__logo-mark"><span>W</span></div>
+      <span class="nav__logo-name">Wembley Christian Centre</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">What's On</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="sermons.html" class="active">Sermons</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="life-groups.html">Life Groups</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="services.html" class="nav__cta">Plan a Visit ↗</a>
+  </nav>
+  <div class="page-hero__content">
+    <div class="page-hero__badge">✦ Sermons</div>
+    <h1 class="page-hero__h1">Watch · Listen · Grow.</h1>
+    <p class="page-hero__sub">Catch up on every message — anywhere, any time. Sundays at 11:00 AM, weekly online.</p>
+  </div>
+  <div class="curve-divider">
+    <svg viewBox="0 0 1280 60" preserveAspectRatio="none"><path d="M0,60 C320,0 960,0 1280,60 L1280,60 L0,60Z" fill="#FAFBFF"/></svg>
+  </div>
+</section>
+
+<!-- FEATURED SERMON -->
+<section class="featured-sermon">
+  <div class="featured-card">
+    <div class="featured-card__thumb">
+      <div class="img-placeholder"><span>latest sermon thumbnail</span></div>
+      <div class="featured-card__thumb-overlay"></div>
+      <div class="featured-card__play">
+        <div class="play-btn"><div class="play-btn__triangle"></div></div>
+      </div>
+      <div class="featured-card__duration">42 min</div>
+    </div>
+    <div class="featured-card__body">
+      <div class="featured-card__badges">
+        <span class="badge-orange">Latest</span>
+        <span class="badge-blue-soft">Spirit-Led Life</span>
+      </div>
+      <h2 class="featured-card__title">The Power of Surrender</h2>
+      <p class="featured-card__meta"><strong>Ps. David Olufemi</strong> · 11 May 2026</p>
+      <p class="featured-card__scripture">📖 Romans 12:1-2</p>
+      <p class="featured-card__desc">In this powerful message, we explore what it means to fully surrender every area of our lives to the Lord — and the joy and freedom that comes when we do.</p>
+      <div class="featured-card__btns">
+        <button class="btn-play">▶ Watch Now</button>
+        <button class="btn-listen">🎧 Listen</button>
+        <button class="btn-dl">↓</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERIES FILTER -->
+<section class="series-filter">
+  <div class="filter-bar" id="seriesFilterBar">
+    <span class="series-filter__label">Series:</span>
+    <button class="filter-btn active" data-series="All">All</button>
+    <button class="filter-btn" data-series="Spirit-Led Life">Spirit-Led Life</button>
+    <button class="filter-btn" data-series="Family &amp; Faith">Family &amp; Faith</button>
+    <button class="filter-btn" data-series="Restored">Restored</button>
+    <button class="filter-btn" data-series="Easter 2026">Easter 2026</button>
+    <button class="filter-btn" data-series="Kingdom Culture">Kingdom Culture</button>
+  </div>
+</section>
+
+<!-- ARCHIVE GRID -->
+<section class="sermon-archive">
+  <div class="archive-grid" id="archiveGrid">
+
+    <div class="sermon-card" data-series="Spirit-Led Life">
+      <div class="sermon-card__thumb">
+        <div class="img-placeholder"><span>sermon thumbnail</span></div>
+        <div class="sermon-card__play-sm"><div class="play-btn-sm"><div class="play-btn-sm__tri"></div></div></div>
+        <div class="sermon-card__dur">38 min</div>
+        <div class="sermon-card__series">Spirit-Led Life</div>
+      </div>
+      <div class="sermon-card__body">
+        <div class="sermon-card__title">Faith Over Fear</div>
+        <div class="sermon-card__speaker">Ps. Sarah Adeyemi</div>
+        <div class="sermon-card__foot"><span>4 May 2026</span><span class="sermon-card__scripture">2 Timothy 1:7</span></div>
+      </div>
+    </div>
+
+    <div class="sermon-card" data-series="Family &amp; Faith">
+      <div class="sermon-card__thumb">
+        <div class="img-placeholder"><span>sermon thumbnail</span></div>
+        <div class="sermon-card__play-sm"><div class="play-btn-sm"><div class="play-btn-sm__tri"></div></div></div>
+        <div class="sermon-card__dur">45 min</div>
+        <div class="sermon-card__series">Family &amp; Faith</div>
+      </div>
+      <div class="sermon-card__body">
+        <div class="sermon-card__title">Roots &amp; Wings</div>
+        <div class="sermon-card__speaker">Ps. David Olufemi</div>
+        <div class="sermon-card__foot"><span>27 Apr 2026</span><span class="sermon-card__scripture">Ephesians 6:1-4</span></div>
+      </div>
+    </div>
+
+    <div class="sermon-card" data-series="Restored">
+      <div class="sermon-card__thumb">
+        <div class="img-placeholder"><span>sermon thumbnail</span></div>
+        <div class="sermon-card__play-sm"><div class="play-btn-sm"><div class="play-btn-sm__tri"></div></div></div>
+        <div class="sermon-card__dur">41 min</div>
+        <div class="sermon-card__series">Restored</div>
+      </div>
+      <div class="sermon-card__body">
+        <div class="sermon-card__title">Restored Identity</div>
+        <div class="sermon-card__speaker">Ps. Michael Okoye</div>
+        <div class="sermon-card__foot"><span>20 Apr 2026</span><span class="sermon-card__scripture">2 Corinthians 5:17</span></div>
+      </div>
+    </div>
+
+    <div class="sermon-card" data-series="Easter 2026">
+      <div class="sermon-card__thumb">
+        <div class="img-placeholder"><span>sermon thumbnail</span></div>
+        <div class="sermon-card__play-sm"><div class="play-btn-sm"><div class="play-btn-sm__tri"></div></div></div>
+        <div class="sermon-card__dur">48 min</div>
+        <div class="sermon-card__series">Easter 2026</div>
+      </div>
+      <div class="sermon-card__body">
+        <div class="sermon-card__title">He Is Risen</div>
+        <div class="sermon-card__speaker">Ps. David Olufemi</div>
+        <div class="sermon-card__foot"><span>13 Apr 2026</span><span class="sermon-card__scripture">Matthew 28:1-10</span></div>
+      </div>
+    </div>
+
+    <div class="sermon-card" data-series="Easter 2026">
+      <div class="sermon-card__thumb">
+        <div class="img-placeholder"><span>sermon thumbnail</span></div>
+        <div class="sermon-card__play-sm"><div class="play-btn-sm"><div class="play-btn-sm__tri"></div></div></div>
+        <div class="sermon-card__dur">39 min</div>
+        <div class="sermon-card__series">Easter 2026</div>
+      </div>
+      <div class="sermon-card__body">
+        <div class="sermon-card__title">The Cross &amp; The Crown</div>
+        <div class="sermon-card__speaker">Ps. Sarah Adeyemi</div>
+        <div class="sermon-card__foot"><span>6 Apr 2026</span><span class="sermon-card__scripture">Philippians 2:5-11</span></div>
+      </div>
+    </div>
+
+    <div class="sermon-card" data-series="Restored">
+      <div class="sermon-card__thumb">
+        <div class="img-placeholder"><span>sermon thumbnail</span></div>
+        <div class="sermon-card__play-sm"><div class="play-btn-sm"><div class="play-btn-sm__tri"></div></div></div>
+        <div class="sermon-card__dur">44 min</div>
+        <div class="sermon-card__series">Restored</div>
+      </div>
+      <div class="sermon-card__body">
+        <div class="sermon-card__title">Anchored</div>
+        <div class="sermon-card__speaker">Ps. David Olufemi</div>
+        <div class="sermon-card__foot"><span>30 Mar 2026</span><span class="sermon-card__scripture">Hebrews 6:19</span></div>
+      </div>
+    </div>
+
+    <div class="sermon-card" data-series="Kingdom Culture">
+      <div class="sermon-card__thumb">
+        <div class="img-placeholder"><span>sermon thumbnail</span></div>
+        <div class="sermon-card__play-sm"><div class="play-btn-sm"><div class="play-btn-sm__tri"></div></div></div>
+        <div class="sermon-card__dur">36 min</div>
+        <div class="sermon-card__series">Kingdom Culture</div>
+      </div>
+      <div class="sermon-card__body">
+        <div class="sermon-card__title">Generous Hearts</div>
+        <div class="sermon-card__speaker">Ps. Michael Okoye</div>
+        <div class="sermon-card__foot"><span>23 Mar 2026</span><span class="sermon-card__scripture">2 Corinthians 9:7</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__grid">
+    <div>
+      <div class="footer__logo">
+        <div class="nav__logo-mark"><span>W</span></div>
+        <div class="footer__brand">Wembley Christian Centre</div>
+      </div>
+      <p class="footer__tagline">Reach Out · Restore · Release. A vibrant, Spirit-filled church family in the heart of Wembley.</p>
+      <div class="footer__socials">
+        <a href="#" class="footer__social">FB</a><a href="#" class="footer__social">IG</a>
+        <a href="#" class="footer__social">YT</a><a href="#" class="footer__social">X</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer__col-title">Explore</div>
+      <a href="about.html" class="footer__col-link">About</a>
+      <a href="services.html" class="footer__col-link">What's On</a>
+      <a href="events.html" class="footer__col-link">Events</a>
+      <a href="sermons.html" class="footer__col-link">Sermons</a>
+    </div>
+    <div>
+      <div class="footer__col-title">Connect</div>
+      <a href="team.html" class="footer__col-link">Team</a>
+      <a href="life-groups.html" class="footer__col-link">Life Groups</a>
+      <a href="contact.html" class="footer__col-link">Contact</a>
+    </div>
+    <div>
+      <div class="footer__col-title">Visit</div>
+      <div class="footer__address">Wembley, London<br>Sundays · 11:00 AM<br>hello@wembleychristiancentre.org.uk</div>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="footer__copy">© 2026 Wembley Christian Centre · All Rights Reserved</div>
+    <div class="footer__copy">Reach Out · Restore · Release</div>
+  </div>
+</footer>
+
+<script>
+  const seriesBar = document.getElementById('seriesFilterBar');
+  const cards = document.querySelectorAll('.sermon-card');
+
+  seriesBar.addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    const s = btn.dataset.series;
+    seriesBar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    cards.forEach(card => {
+      card.classList.toggle('hidden', s !== 'All' && card.dataset.series !== s);
+    });
+  });
+</script>
+</body>
+</html>

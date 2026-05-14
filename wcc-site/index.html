@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wembley Christian Centre — Reach Out · Restore · Release</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue:      #1A8CE8;
+      --blue-dark: #0E5FA6;
+      --blue-soft: #EBF6FF;
+      --orange:    #F07D3A;
+      --dark:      #0D1B2A;
+      --muted:     #5A6A7E;
+      --bg:        #FAFBFF;
+      --font:      'Manrope', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); font-family: var(--font); color: var(--dark); line-height: 1; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; }
+
+    /* ── Placeholder image ── */
+    .img-placeholder {
+      width: 100%;
+      background: repeating-linear-gradient(135deg, #b8d4ec 0, #b8d4ec 1px, #e8f0f7 0, #e8f0f7 8px);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .img-placeholder span {
+      font-family: monospace; font-size: 11px; color: #5a7a95;
+      background: rgba(255,255,255,0.78); padding: 4px 10px; border-radius: 3px;
+    }
+
+    /* ─────────────────────────────────
+       NAV
+    ───────────────────────────────── */
+    .nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 48px;
+      position: absolute; top: 0; left: 0; right: 0; z-index: 20;
+    }
+    .nav--light {
+      position: relative;
+      background: #fff;
+      border-bottom: 1px solid #EEF2F8;
+    }
+    .nav__logo {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav__logo-mark {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue), #64B8FF);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .nav__logo-mark span { color: #fff; font-weight: 900; font-size: 16px; }
+    .nav__logo-name { font-size: 16px; font-weight: 800; color: #fff; letter-spacing: -0.3px; }
+    .nav__links {
+      display: flex; gap: 26px; list-style: none; font-size: 14px; font-weight: 600;
+    }
+    .nav__links a {
+      color: rgba(255,255,255,0.85);
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
+    }
+    .nav__links a.active {
+      color: #fff;
+      border-bottom-color: #fff;
+    }
+    .nav__cta {
+      background: #fff; color: var(--blue);
+      border-radius: 10px; padding: 11px 24px;
+      font-weight: 700; font-size: 14px;
+      white-space: nowrap;
+    }
+
+    /* ─────────────────────────────────
+       HERO
+    ───────────────────────────────── */
+    .hero {
+      position: relative; overflow: hidden; height: 720px;
+    }
+    .hero__bg {
+      position: absolute; inset: 0; height: 100%;
+    }
+    .hero__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(120deg, rgba(26,140,232,0.82) 0%, rgba(26,140,232,0.4) 50%, rgba(0,0,0,0.15) 100%);
+    }
+    .hero__content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 0 56px; max-width: 740px;
+    }
+    .hero__badge {
+      background: rgba(255,255,255,0.2); backdrop-filter: blur(8px);
+      border-radius: 40px; padding: 6px 18px;
+      width: fit-content; margin-bottom: 24px;
+      border: 1px solid rgba(255,255,255,0.3);
+      font-size: 12px; font-weight: 700; color: #fff; letter-spacing: 0.08em;
+    }
+    .hero__h1 {
+      font-size: clamp(48px, 6vw, 84px); font-weight: 900; color: #fff;
+      line-height: 1.0; letter-spacing: -2px; margin-bottom: 24px;
+    }
+    .hero__sub {
+      font-size: 19px; color: rgba(255,255,255,0.88); line-height: 1.6;
+      margin-bottom: 40px; max-width: 520px;
+    }
+    .hero__btns { display: flex; gap: 12px; }
+    .btn-white {
+      background: #fff; color: var(--blue);
+      border-radius: 12px; padding: 16px 34px;
+      font-family: var(--font); font-weight: 800; font-size: 15px;
+      display: inline-block;
+    }
+    .btn-ghost {
+      background: rgba(255,255,255,0.12); color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      border-radius: 12px; padding: 16px 30px;
+      font-family: var(--font); font-weight: 700; font-size: 15px;
+      backdrop-filter: blur(6px); display: inline-block;
+    }
+
+    /* Curve divider */
+    .curve-divider {
+      position: absolute; bottom: -2px; left: 0; right: 0;
+    }
+    .curve-divider svg { width: 100%; height: 60px; display: block; }
+
+    /* ─────────────────────────────────
+       QUICK LINKS
+    ───────────────────────────────── */
+    .quick-links {
+      padding: 72px 48px 60px; max-width: 1280px; margin: 0 auto;
+    }
+    .quick-links__grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .quick-card {
+      border-radius: 20px; padding: 36px; color: #fff; display: block;
+      transition: transform 0.2s;
+    }
+    .quick-card:hover { transform: translateY(-3px); }
+    .quick-card__title { font-size: 24px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.3px; }
+    .quick-card__desc { font-size: 14px; opacity: 0.85; line-height: 1.6; margin-bottom: 28px; }
+    .quick-card__btn {
+      background: rgba(255,255,255,0.2); color: #fff;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 8px; padding: 9px 20px;
+      font-weight: 700; font-size: 13px; display: inline-block;
+    }
+
+    /* ─────────────────────────────────
+       ABOUT
+    ───────────────────────────────── */
+    .about {
+      padding: 60px 48px; max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+    }
+    .about__img-wrap { position: relative; }
+    .about__img-wrap .img-placeholder { border-radius: 24px; height: 460px; }
+    .about__stat {
+      position: absolute; bottom: -20px; right: -20px;
+      background: #fff; border-radius: 16px; padding: 20px 26px;
+      box-shadow: 0 12px 36px rgba(26,140,232,0.18);
+      border: 1px solid #EEF2F8;
+    }
+    .about__stat-num { font-size: 36px; font-weight: 900; color: var(--blue); line-height: 1; }
+    .about__stat-label { font-size: 13px; color: var(--muted); font-weight: 700; margin-top: 4px; }
+    .about__body { font-size: 16px; color: var(--muted); line-height: 1.85; margin-bottom: 20px; }
+    .btn-blue {
+      background: var(--blue); color: #fff;
+      border-radius: 12px; padding: 14px 30px;
+      font-family: var(--font); font-weight: 700; font-size: 14px;
+      display: inline-block;
+    }
+
+    /* ─────────────────────────────────
+       SERVICE TIMES
+    ───────────────────────────────── */
+    .service-times { padding: 60px 48px; max-width: 1280px; margin: 0 auto; }
+    .service-times__card {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+      border-radius: 24px; padding: 56px 52px; color: #fff;
+      position: relative; overflow: hidden;
+    }
+    .service-times__card::before {
+      content: ''; position: absolute; top: -80px; right: -80px;
+      width: 280px; height: 280px; border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .service-times__card::after {
+      content: ''; position: absolute; bottom: -120px; left: -60px;
+      width: 320px; height: 320px; border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+    .service-times__inner { position: relative; }
+    .service-times__header {
+      display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;
+    }
+    .service-times__kicker {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.15); border-radius: 40px; padding: 5px 14px;
+      margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.2);
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .service-times__h2 {
+      font-size: clamp(32px, 4vw, 48px); font-weight: 800; letter-spacing: -0.5px;
+    }
+    .service-times__see-all {
+      font-size: 14px; font-weight: 700; color: #fff;
+      text-decoration: underline; text-underline-offset: 4px; opacity: 0.85;
+    }
+    .service-times__grid {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px;
+    }
+    .service-card {
+      background: rgba(255,255,255,0.1); border-radius: 14px; padding: 22px 16px;
+      text-align: center; border: 1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(4px);
+    }
+    .service-card__label {
+      font-size: 11px; font-weight: 700; opacity: 0.75;
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px;
+    }
+    .service-card__time { font-size: 26px; font-weight: 900; line-height: 1; margin-bottom: 4px; }
+    .service-card__day { font-size: 12px; opacity: 0.65; }
+
+    /* ─────────────────────────────────
+       EVENTS PREVIEW
+    ───────────────────────────────── */
+    .events-preview { padding: 60px 48px 40px; max-width: 1280px; margin: 0 auto; }
+    .section-header {
+      display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;
+    }
+    .section-header__link {
+      font-size: 14px; font-weight: 700; color: var(--blue);
+      padding: 10px 22px;
+      border: 1.5px solid rgba(26,140,232,0.3); border-radius: 50px;
+      margin-bottom: 8px;
+    }
+    .events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .event-card {
+      background: #fff; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 4px 24px rgba(26,140,232,0.08);
+      border: 1px solid #EEF2F8;
+    }
+    .event-card__img { position: relative; height: 180px; }
+    .event-card__img .img-placeholder {
+      position: absolute; inset: 0; height: 100%;
+      background: repeating-linear-gradient(135deg, #c4dbef 0, #c4dbef 1px, #e8f0f7 0, #e8f0f7 8px);
+    }
+    .event-card__date-badge {
+      position: absolute; top: 14px; left: 14px;
+      color: #fff; border-radius: 8px; padding: 10px 12px;
+      text-align: center; min-width: 56px;
+    }
+    .event-card__date-num { font-size: 18px; font-weight: 900; line-height: 1; }
+    .event-card__date-mon { font-size: 10px; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.05em; }
+    .event-card__body { padding: 22px 24px; }
+    .event-card__tag {
+      display: inline-block; background: var(--blue-soft); color: var(--blue);
+      font-size: 10px; font-weight: 800; padding: 3px 10px; border-radius: 4px;
+      margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .event-card__title { font-size: 19px; font-weight: 800; color: var(--dark); margin-bottom: 8px; }
+    .event-card__time { font-size: 13px; color: var(--muted); font-weight: 600; }
+
+    /* ─────────────────────────────────
+       LIFE GROUPS CTA
+    ───────────────────────────────── */
+    .life-groups { padding: 60px 48px; max-width: 1280px; margin: 0 auto; }
+    .life-groups__card {
+      background: var(--blue-soft); border-radius: 24px; padding: 60px 52px;
+      display: grid; grid-template-columns: 2fr 1fr; gap: 60px; align-items: center;
+    }
+    .life-groups__body { font-size: 16px; color: var(--muted); line-height: 1.85; margin-bottom: 28px; max-width: 540px; }
+    .life-groups__btns { display: flex; gap: 12px; }
+    .btn-outline {
+      background: #fff; color: var(--blue);
+      border: 1.5px solid rgba(26,140,232,0.3);
+      border-radius: 12px; padding: 14px 28px;
+      font-family: var(--font); font-weight: 700; font-size: 14px;
+      display: inline-block;
+    }
+    .life-groups__img-wrap { position: relative; height: 280px; }
+    .life-groups__img-wrap .img-placeholder { border-radius: 20px; height: 100%; }
+
+    /* ─────────────────────────────────
+       TESTIMONIAL
+    ───────────────────────────────── */
+    .testimonial {
+      padding: 80px 48px; text-align: center; max-width: 880px; margin: 0 auto;
+    }
+    .testimonial__mark {
+      font-size: 84px; color: var(--blue); line-height: 0.6; margin-bottom: 16px;
+      font-family: Georgia, serif; opacity: 0.3;
+    }
+    .testimonial__quote {
+      font-size: clamp(22px, 3vw, 32px); font-weight: 500; color: var(--dark);
+      line-height: 1.4; letter-spacing: -0.3px; margin-bottom: 32px;
+    }
+    .testimonial__attr {
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+    }
+    .testimonial__avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--blue-soft);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; color: var(--blue); font-size: 14px; flex-shrink: 0;
+    }
+    .testimonial__name { font-size: 14px; font-weight: 800; color: var(--dark); }
+    .testimonial__role { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+    /* ─────────────────────────────────
+       SECTION HEAD
+    ───────────────────────────────── */
+    .section-head { margin-bottom: 40px; }
+    .section-head--center { text-align: center; }
+    .section-head__kicker {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--blue-soft); border-radius: 40px; padding: 5px 14px;
+      margin-bottom: 18px;
+    }
+    .section-head__kicker-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--blue);
+    }
+    .section-head__kicker-text {
+      font-size: 12px; font-weight: 700; color: var(--blue);
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .section-head__h2 {
+      font-size: clamp(32px, 4vw, 52px); font-weight: 800;
+      line-height: 1.1; letter-spacing: -1px; color: var(--dark);
+    }
+
+    /* ─────────────────────────────────
+       FOOTER
+    ───────────────────────────────── */
+    .footer {
+      background: var(--dark); color: #fff;
+      padding: 60px 48px 30px;
+    }
+    .footer__grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer__logo { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+    .footer__brand { font-size: 18px; font-weight: 800; }
+    .footer__tagline {
+      font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.7;
+      max-width: 360px; margin-bottom: 20px;
+    }
+    .footer__socials { display: flex; gap: 10px; }
+    .footer__social {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; cursor: pointer;
+      color: #fff;
+    }
+    .footer__col-title {
+      font-size: 13px; font-weight: 800; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 16px;
+    }
+    .footer__col-link {
+      display: block; font-size: 14px; color: rgba(255,255,255,0.7);
+      margin-bottom: 10px;
+    }
+    .footer__col-link:hover { color: #fff; }
+    .footer__address { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.7; }
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer__copy { font-size: 12px; color: rgba(255,255,255,0.35); }
+
+    /* ─────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────── */
+    @media (max-width: 1024px) {
+      .about { grid-template-columns: 1fr; gap: 60px; }
+      .service-times__grid { grid-template-columns: repeat(3, 1fr); }
+      .footer__grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav { padding: 16px 24px; }
+      .nav__links, .nav__cta { display: none; }
+      .hero { height: 580px; }
+      .hero__content { padding: 0 24px; }
+      .hero__h1 { letter-spacing: -1px; }
+      .quick-links { padding: 48px 24px; }
+      .quick-links__grid { grid-template-columns: 1fr; }
+      .about { padding: 48px 24px; }
+      .about__stat { right: 0; }
+      .service-times { padding: 48px 24px; }
+      .service-times__card { padding: 36px 28px; }
+      .service-times__grid { grid-template-columns: repeat(2, 1fr); }
+      .service-times__header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .events-preview { padding: 48px 24px; }
+      .events-grid { grid-template-columns: 1fr; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .life-groups { padding: 48px 24px; }
+      .life-groups__card { grid-template-columns: 1fr; padding: 36px 28px; gap: 32px; }
+      .testimonial { padding: 60px 24px; }
+      .footer { padding: 48px 24px 24px; }
+      .footer__grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer__bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section class="hero">
+  <!-- background photo placeholder -->
+  <div class="img-placeholder hero__bg">
+    <span>vibrant congregation worship — full bleed hero</span>
+  </div>
+  <!-- gradient overlay -->
+  <div class="hero__overlay"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">
+      <div class="nav__logo-mark"><span>W</span></div>
+      <span class="nav__logo-name">Wembley Christian Centre</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">What's On</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="sermons.html">Sermons</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="life-groups.html">Life Groups</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="services.html" class="nav__cta">Plan a Visit ↗</a>
+  </nav>
+
+  <!-- Hero copy -->
+  <div class="hero__content">
+    <div class="hero__badge">✦ SPIRIT-FILLED · WEMBLEY, LONDON</div>
+    <h1 class="hero__h1">Where lives are<br>changed forever.</h1>
+    <p class="hero__sub">Reach Out · Restore · Release — join a family that loves God and loves Wembley.</p>
+    <div class="hero__btns">
+      <a href="services.html" class="btn-white">Join Sunday · 11AM</a>
+      <a href="sermons.html" class="btn-ghost">Watch Sermons</a>
+    </div>
+  </div>
+
+  <!-- Curve divider -->
+  <div class="curve-divider">
+    <svg viewBox="0 0 1280 60" preserveAspectRatio="none">
+      <path d="M0,60 C320,0 960,0 1280,60 L1280,60 L0,60Z" fill="#FAFBFF"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     QUICK LINKS
+════════════════════════════════════════ -->
+<section class="quick-links">
+  <div class="quick-links__grid">
+
+    <a href="services.html" class="quick-card" style="background: #1A8CE8;">
+      <div class="quick-card__title">I'm New Here</div>
+      <div class="quick-card__desc">Plan your first visit — find out what to expect when you join us.</div>
+      <span class="quick-card__btn">Plan Visit →</span>
+    </a>
+
+    <a href="sermons.html" class="quick-card" style="background: #F07D3A;">
+      <div class="quick-card__title">Watch Online</div>
+      <div class="quick-card__desc">Catch up on the latest sermons, talks and worship moments.</div>
+      <span class="quick-card__btn">Watch Now →</span>
+    </a>
+
+    <a href="life-groups.html" class="quick-card" style="background: #0D1B2A;">
+      <div class="quick-card__title">Get Involved</div>
+      <div class="quick-card__desc">Life groups, serving teams and ministries — find your place.</div>
+      <span class="quick-card__btn">Explore →</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ABOUT
+════════════════════════════════════════ -->
+<section class="about">
+  <div class="about__img-wrap">
+    <div class="img-placeholder" style="height:460px;border-radius:24px;">
+      <span>church community life</span>
+    </div>
+    <div class="about__stat">
+      <div class="about__stat-num">20+</div>
+      <div class="about__stat-label">Years in Wembley</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-head">
+      <div class="section-head__kicker">
+        <div class="section-head__kicker-dot"></div>
+        <span class="section-head__kicker-text">About WCC</span>
+      </div>
+      <h2 class="section-head__h2">A community<br>built on love.</h2>
+    </div>
+    <p class="about__body">
+      Wembley Christian Centre is a Pentecostal church with a multicultural heart. For over 20 years, we've been serving Wembley with the love of Jesus — through worship, community and practical care.
+    </p>
+    <p class="about__body">
+      We believe in the transforming power of the Holy Spirit and that every person has a God-given purpose waiting to be released.
+    </p>
+    <a href="about.html" class="btn-blue">Discover Our Story →</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SERVICE TIMES
+════════════════════════════════════════ -->
+<section class="service-times">
+  <div class="service-times__card">
+    <div class="service-times__inner">
+      <div class="service-times__header">
+        <div>
+          <div class="service-times__kicker">Join Us Weekly</div>
+          <h2 class="service-times__h2">Service Times</h2>
+        </div>
+        <a href="services.html" class="service-times__see-all">See full schedule →</a>
+      </div>
+      <div class="service-times__grid">
+
+        <div class="service-card">
+          <div class="service-card__label">Sunday Service</div>
+          <div class="service-card__time">11:00 AM</div>
+          <div class="service-card__day">Sundays</div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card__label">Prayer Meeting</div>
+          <div class="service-card__time">7:30 PM</div>
+          <div class="service-card__day">Fridays</div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card__label">Bethel Kaf</div>
+          <div class="service-card__time">11:30 AM</div>
+          <div class="service-card__day">Tuesdays</div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card__label">Mainly Music</div>
+          <div class="service-card__time">10:15 AM</div>
+          <div class="service-card__day">Wednesdays</div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card__label">Life Groups</div>
+          <div class="service-card__time">Weekly</div>
+          <div class="service-card__day">Various</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     EVENTS PREVIEW
+════════════════════════════════════════ -->
+<section class="events-preview">
+  <div class="section-header">
+    <div class="section-head">
+      <div class="section-head__kicker">
+        <div class="section-head__kicker-dot"></div>
+        <span class="section-head__kicker-text">What's Next</span>
+      </div>
+      <h2 class="section-head__h2">Coming Up at WCC</h2>
+    </div>
+    <a href="events.html" class="section-header__link">All Events →</a>
+  </div>
+
+  <div class="events-grid">
+
+    <div class="event-card">
+      <div class="event-card__img">
+        <div class="img-placeholder"><span>event photo</span></div>
+        <div class="event-card__date-badge" style="background:#1A8CE8;">
+          <div class="event-card__date-num">18</div>
+          <div class="event-card__date-mon">May</div>
+        </div>
+      </div>
+      <div class="event-card__body">
+        <span class="event-card__tag">Weekly</span>
+        <div class="event-card__title">Sunday Celebrations</div>
+        <div class="event-card__time">Sun · 11:00 AM</div>
+      </div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-card__img">
+        <div class="img-placeholder"><span>event photo</span></div>
+        <div class="event-card__date-badge" style="background:#F07D3A;">
+          <div class="event-card__date-num">23</div>
+          <div class="event-card__date-mon">May</div>
+        </div>
+      </div>
+      <div class="event-card__body">
+        <span class="event-card__tag">Special</span>
+        <div class="event-card__title">Night of Worship</div>
+        <div class="event-card__time">Fri · 7:30 PM</div>
+      </div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-card__img">
+        <div class="img-placeholder"><span>event photo</span></div>
+        <div class="event-card__date-badge" style="background:#0D1B2A;">
+          <div class="event-card__date-num">30</div>
+          <div class="event-card__date-mon">May</div>
+        </div>
+      </div>
+      <div class="event-card__body">
+        <span class="event-card__tag">Outreach</span>
+        <div class="event-card__title">Community Outreach</div>
+        <div class="event-card__time">Sat · 10:00 AM</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     LIFE GROUPS CTA
+════════════════════════════════════════ -->
+<section class="life-groups">
+  <div class="life-groups__card">
+    <div>
+      <div class="section-head">
+        <div class="section-head__kicker">
+          <div class="section-head__kicker-dot"></div>
+          <span class="section-head__kicker-text">Life Groups</span>
+        </div>
+        <h2 class="section-head__h2">Don't do life alone.<br>Find your people.</h2>
+      </div>
+      <p class="life-groups__body">
+        Life Groups are small communities that meet weekly across Wembley — for friendship, prayer, study and growth. Whatever your story, there's a group for you.
+      </p>
+      <div class="life-groups__btns">
+        <a href="life-groups.html" class="btn-blue">Find a Group</a>
+        <a href="contact.html" class="btn-outline">Get in Touch</a>
+      </div>
+    </div>
+    <div class="life-groups__img-wrap">
+      <div class="img-placeholder" style="height:100%;border-radius:20px;">
+        <span>life group</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     TESTIMONIAL
+════════════════════════════════════════ -->
+<section class="testimonial">
+  <div class="testimonial__mark">"</div>
+  <p class="testimonial__quote">
+    WCC has become my family. I came in looking for hope and found a home, a calling, and a community that walks with me every step of the way.
+  </p>
+  <div class="testimonial__attr">
+    <div class="testimonial__avatar">JM</div>
+    <div>
+      <div class="testimonial__name">Joyce M.</div>
+      <div class="testimonial__role">WCC Member, 8 years</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer__grid">
+
+    <div>
+      <div class="footer__logo">
+        <div class="nav__logo-mark"><span>W</span></div>
+        <div class="footer__brand">Wembley Christian Centre</div>
+      </div>
+      <p class="footer__tagline">
+        Reach Out · Restore · Release. A vibrant, Spirit-filled church family in the heart of Wembley.
+      </p>
+      <div class="footer__socials">
+        <a href="#" class="footer__social">FB</a>
+        <a href="#" class="footer__social">IG</a>
+        <a href="#" class="footer__social">YT</a>
+        <a href="#" class="footer__social">X</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="footer__col-title">Explore</div>
+      <a href="about.html" class="footer__col-link">About</a>
+      <a href="services.html" class="footer__col-link">What's On</a>
+      <a href="events.html" class="footer__col-link">Events</a>
+      <a href="sermons.html" class="footer__col-link">Sermons</a>
+    </div>
+
+    <div>
+      <div class="footer__col-title">Connect</div>
+      <a href="team.html" class="footer__col-link">Team</a>
+      <a href="life-groups.html" class="footer__col-link">Life Groups</a>
+      <a href="contact.html" class="footer__col-link">Contact</a>
+    </div>
+
+    <div>
+      <div class="footer__col-title">Visit</div>
+      <div class="footer__address">
+        Wembley, London<br>
+        Sundays · 11:00 AM<br>
+        hello@wembleychristiancentre.org.uk
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer__bottom">
+    <div class="footer__copy">© 2026 Wembley Christian Centre · All Rights Reserved</div>
+    <div class="footer__copy">Reach Out · Restore · Release</div>
+  </div>
+</footer>
+
+</body>
+</html>

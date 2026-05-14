@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Wembley Christian Centre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    /* Mission */
+    .mission { padding: 80px 48px; max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .mission__body { font-size: 17px; color: var(--muted); line-height: 1.85; margin-bottom: 22px; }
+    .mission__body strong { color: var(--dark); }
+    .mission__photos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    /* Values */
+    .values { padding: 60px 48px; background: #fff; }
+    .values__inner { max-width: 1280px; margin: 0 auto; }
+    .values__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px; }
+    .value-card { background: var(--blue-soft); border-radius: 20px; padding: 32px 28px; border: 1px solid rgba(26,140,232,0.1); }
+    .value-card__icon { font-size: 36px; margin-bottom: 16px; }
+    .value-card__title { font-size: 20px; font-weight: 800; color: var(--dark); margin-bottom: 10px; letter-spacing: -0.3px; }
+    .value-card__desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+    /* Stats */
+    .stats { padding: 80px 48px; max-width: 1280px; margin: 0 auto; }
+    .stats__card {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+      border-radius: 24px; padding: 60px 52px; color: #fff; position: relative; overflow: hidden;
+    }
+    .stats__card::before {
+      content: ''; position: absolute; top: -100px; right: -100px;
+      width: 360px; height: 360px; border-radius: 50%; background: rgba(255,255,255,0.06);
+    }
+    .stats__inner { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .stats__since { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.7; margin-bottom: 16px; }
+    .stats__h2 { font-size: clamp(32px, 4vw, 48px); font-weight: 800; line-height: 1.1; letter-spacing: -1px; margin-bottom: 22px; }
+    .stats__body { font-size: 16px; opacity: 0.85; line-height: 1.85; }
+    .stats__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .stat-box { background: rgba(255,255,255,0.1); border-radius: 16px; padding: 24px; border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(4px); }
+    .stat-box__num { font-size: 44px; font-weight: 900; line-height: 1; margin-bottom: 6px; }
+    .stat-box__label { font-size: 13px; opacity: 0.75; font-weight: 600; }
+
+    /* What to Expect */
+    .expect { padding: 60px 48px 80px; max-width: 1280px; margin: 0 auto; }
+    .expect__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
+    .expect-card { background: #fff; border-radius: 16px; padding: 28px 24px; border: 1px solid #EEF2F8; }
+    .expect-card__step { font-size: 13px; font-weight: 800; color: var(--blue); letter-spacing: 0.1em; margin-bottom: 12px; }
+    .expect-card__title { font-size: 17px; font-weight: 800; color: var(--dark); margin-bottom: 8px; }
+    .expect-card__desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
+    .expect__cta { text-align: center; margin-top: 48px; }
+
+    @media (max-width: 1024px) {
+      .mission { grid-template-columns: 1fr; gap: 48px; }
+      .stats__inner { grid-template-columns: 1fr; gap: 40px; }
+      .values__grid { grid-template-columns: 1fr 1fr; }
+      .expect__grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .mission, .stats, .expect { padding: 48px 24px; }
+      .values { padding: 48px 24px; }
+      .values__grid { grid-template-columns: 1fr; }
+      .stats__card { padding: 36px 28px; }
+      .expect__grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="img-placeholder page-hero__bg" style="background-image: repeating-linear-gradient(135deg,#a8c8e6 0,#a8c8e6 1px,#dce8f3 0,#dce8f3 8px);">
+    <span>about page hero — congregation gathering</span>
+  </div>
+  <div class="page-hero__overlay"></div>
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">
+      <div class="nav__logo-mark"><span>W</span></div>
+      <span class="nav__logo-name">Wembley Christian Centre</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="services.html">What's On</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="sermons.html">Sermons</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="life-groups.html">Life Groups</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="services.html" class="nav__cta">Plan a Visit ↗</a>
+  </nav>
+  <div class="page-hero__content">
+    <div class="page-hero__badge">✦ About</div>
+    <h1 class="page-hero__h1">A family rooted<br>in faith.</h1>
+    <p class="page-hero__sub">For over two decades, Wembley Christian Centre has been a home for those seeking God, healing and genuine community.</p>
+  </div>
+  <div class="curve-divider">
+    <svg viewBox="0 0 1280 60" preserveAspectRatio="none"><path d="M0,60 C320,0 960,0 1280,60 L1280,60 L0,60Z" fill="#FAFBFF"/></svg>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission">
+  <div>
+    <div class="section-head">
+      <div class="section-head__kicker">
+        <div class="section-head__kicker-dot"></div>
+        <span class="section-head__kicker-text">Our Mission</span>
+      </div>
+      <h2 class="section-head__h2">Reach Out.<br>Restore. Release.</h2>
+    </div>
+    <p class="mission__body">
+      These three words shape everything we do. We <strong>Reach Out</strong> to those who don't yet know God's love. We <strong>Restore</strong> the broken-hearted through the power of the Holy Spirit. And we <strong>Release</strong> people into their God-given destiny.
+    </p>
+    <p class="mission__body">
+      We are Pentecostal in faith, multicultural in character, and unwavering in our pursuit of seeing every life transformed by Christ.
+    </p>
+  </div>
+  <div class="mission__photos">
+    <div class="img-placeholder" style="height:220px;border-radius:18px;"><span>worship</span></div>
+    <div class="img-placeholder" style="height:220px;border-radius:18px;margin-top:28px;"><span>prayer</span></div>
+    <div class="img-placeholder" style="height:180px;border-radius:18px;"><span>community</span></div>
+    <div class="img-placeholder" style="height:180px;border-radius:18px;margin-top:-8px;"><span>outreach</span></div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values">
+  <div class="values__inner">
+    <div class="section-head section-head--center">
+      <div class="section-head__kicker">
+        <div class="section-head__kicker-dot"></div>
+        <span class="section-head__kicker-text">What We Believe</span>
+      </div>
+      <h2 class="section-head__h2">Our Core Values</h2>
+    </div>
+    <div class="values__grid">
+      <div class="value-card">
+        <div class="value-card__icon">✝️</div>
+        <div class="value-card__title">Christ at the Centre</div>
+        <p class="value-card__desc">Jesus is Lord. Every gathering, every decision, every dream — centred on Him and His Word.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-card__icon">🕊</div>
+        <div class="value-card__title">Spirit-Filled Life</div>
+        <p class="value-card__desc">We believe in the active, present work of the Holy Spirit in every believer's daily life.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-card__icon">❤️</div>
+        <div class="value-card__title">Genuine Community</div>
+        <p class="value-card__desc">Faith is meant to be lived together. We do life with one another — in joy and in struggle.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-card__icon">🌍</div>
+        <div class="value-card__title">Multicultural Family</div>
+        <p class="value-card__desc">Wembley is one of the world's most diverse communities and our church reflects that beautifully.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-card__icon">🙏</div>
+        <div class="value-card__title">Powerful Prayer</div>
+        <p class="value-card__desc">Prayer is the foundation. We gather to pray together, and we live as a praying people.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-card__icon">🌱</div>
+        <div class="value-card__title">Lifelong Growth</div>
+        <p class="value-card__desc">We are all on a journey — growing deeper in faith, character and our calling.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS / HISTORY -->
+<section class="stats">
+  <div class="stats__card">
+    <div class="stats__inner">
+      <div>
+        <div class="stats__since">Since 2001</div>
+        <h2 class="stats__h2">Two decades of faithfully serving Wembley.</h2>
+        <p class="stats__body">From a small gathering to a thriving multicultural church family — every chapter of our story has been written by the faithful presence of God and the love of His people.</p>
+      </div>
+      <div class="stats__grid">
+        <div class="stat-box">
+          <div class="stat-box__num">20+</div>
+          <div class="stat-box__label">Years in Wembley</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box__num">50+</div>
+          <div class="stat-box__label">Nations Represented</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box__num">10+</div>
+          <div class="stat-box__label">Weekly Ministries</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box__num">∞</div>
+          <div class="stat-box__label">Lives Transformed</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT TO EXPECT -->
+<section class="expect">
+  <div class="section-head section-head--center">
+    <div class="section-head__kicker">
+      <div class="section-head__kicker-dot"></div>
+      <span class="section-head__kicker-text">Plan a Visit</span>
+    </div>
+    <h2 class="section-head__h2">What to Expect</h2>
+    <p class="section-head__subtitle">We can't wait to welcome you. Here's what your first Sunday at WCC looks like.</p>
+  </div>
+  <div class="expect__grid">
+    <div class="expect-card">
+      <div class="expect-card__step">01</div>
+      <div class="expect-card__title">Arrive &amp; Welcome</div>
+      <p class="expect-card__desc">Pull up at 10:45 AM. Our welcome team will greet you and show you around.</p>
+    </div>
+    <div class="expect-card">
+      <div class="expect-card__step">02</div>
+      <div class="expect-card__title">Coffee &amp; Connect</div>
+      <p class="expect-card__desc">Grab a coffee in the foyer. Meet a few faces before the service starts.</p>
+    </div>
+    <div class="expect-card">
+      <div class="expect-card__step">03</div>
+      <div class="expect-card__title">Worship Together</div>
+      <p class="expect-card__desc">Service begins at 11:00 AM — worship, prayer, the Word and presence of God.</p>
+    </div>
+    <div class="expect-card">
+      <div class="expect-card__step">04</div>
+      <div class="expect-card__title">Stay for Lunch</div>
+      <p class="expect-card__desc">Many stay around after for a chat and the occasional shared meal.</p>
+    </div>
+  </div>
+  <div class="expect__cta">
+    <a href="contact.html" class="btn-blue" style="font-size:15px;padding:14px 32px;">Plan Your Visit →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__grid">
+    <div>
+      <div class="footer__logo">
+        <div class="nav__logo-mark"><span>W</span></div>
+        <div class="footer__brand">Wembley Christian Centre</div>
+      </div>
+      <p class="footer__tagline">Reach Out · Restore · Release. A vibrant, Spirit-filled church family in the heart of Wembley.</p>
+      <div class="footer__socials">
+        <a href="#" class="footer__social">FB</a>
+        <a href="#" class="footer__social">IG</a>
+        <a href="#" class="footer__social">YT</a>
+        <a href="#" class="footer__social">X</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer__col-title">Explore</div>
+      <a href="about.html" class="footer__col-link">About</a>
+      <a href="services.html" class="footer__col-link">What's On</a>
+      <a href="events.html" class="footer__col-link">Events</a>
+      <a href="sermons.html" class="footer__col-link">Sermons</a>
+    </div>
+    <div>
+      <div class="footer__col-title">Connect</div>
+      <a href="team.html" class="footer__col-link">Team</a>
+      <a href="life-groups.html" class="footer__col-link">Life Groups</a>
+      <a href="contact.html" class="footer__col-link">Contact</a>
+    </div>
+    <div>
+      <div class="footer__col-title">Visit</div>
+      <div class="footer__address">Wembley, London<br>Sundays · 11:00 AM<br>hello@wembleychristiancentre.org.uk</div>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="footer__copy">© 2026 Wembley Christian Centre · All Rights Reserved</div>
+    <div class="footer__copy">Reach Out · Restore · Release</div>
+  </div>
+</footer>
+
+</body>
+</html>
