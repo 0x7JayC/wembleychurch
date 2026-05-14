@@ -182,6 +182,67 @@ input:focus, textarea:focus, select:focus { outline: 2px solid var(--blue); outl
 }
 
 /* ─────────────────────────────────
+   HAMBURGER
+───────────────────────────────── */
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  width: 38px; height: 38px;
+  flex-shrink: 0;
+}
+.nav__hamburger span {
+  display: block;
+  width: 22px; height: 2px;
+  background: #fff;
+  border-radius: 2px;
+}
+
+/* ─────────────────────────────────
+   MOBILE MENU
+───────────────────────────────── */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  z-index: 200;
+  overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.mobile-menu.is-open { opacity: 1; pointer-events: auto; }
+.mobile-menu__inner { padding: 24px 28px 48px; min-height: 100vh; display: flex; flex-direction: column; }
+.mobile-menu__header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 40px;
+}
+.mobile-menu__logo { height: 36px; width: auto; max-width: none; display: block; }
+.mobile-menu__close {
+  background: none; border: none; cursor: pointer;
+  color: var(--dark); padding: 4px;
+  display: flex; align-items: center; justify-content: center;
+}
+.mobile-menu__links { list-style: none; flex: 1; }
+.mobile-menu__links li { border-bottom: 1px solid #EEF2F8; }
+.mobile-menu__links a {
+  display: block; padding: 20px 0;
+  font-size: 22px; font-weight: 700;
+  color: var(--dark); letter-spacing: -0.3px;
+}
+.mobile-menu__links a.active { color: var(--blue); }
+.mobile-menu__cta {
+  margin-top: 32px; display: block;
+  text-align: center; padding: 18px;
+  font-size: 16px; border-radius: 14px;
+}
+
+/* ─────────────────────────────────
    RESPONSIVE
 ───────────────────────────────── */
 @media (max-width: 1024px) {
@@ -190,6 +251,7 @@ input:focus, textarea:focus, select:focus { outline: 2px solid var(--blue); outl
 @media (max-width: 768px) {
   .nav { padding: 16px 24px; }
   .nav__links, .nav__cta { display: none; }
+  .nav__hamburger { display: flex; }
   .page-hero { height: 380px; }
   .page-hero__content { padding: 80px 24px 32px; }
   .footer { padding: 48px 24px 24px; }
