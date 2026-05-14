@@ -40,7 +40,7 @@ input:focus, textarea:focus, select:focus { outline: 2px solid var(--blue); outl
   position: absolute; top: 0; left: 0; right: 0; z-index: 20;
 }
 .nav__logo { display: flex; align-items: center; }
-.nav__logo-img { height: 32px; width: auto; display: block; filter: brightness(0) invert(1); }
+.nav__logo-img { height: 44px; width: auto; max-width: none; display: block; filter: brightness(0) invert(1); }
 .nav__links { display: flex; gap: 26px; list-style: none; font-size: 14px; font-weight: 600; }
 .nav__links a { color: rgba(255,255,255,0.85); padding-bottom: 2px; border-bottom: 2px solid transparent; }
 .nav__links a.active { color: #fff; border-bottom-color: #fff; }
