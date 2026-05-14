@@ -1,2 +1,8 @@
 [build]
   publish = "wcc-site"
+
+[[redirects]]
+  from = "/api/yt-feed"
+  to = "https://www.youtube.com/feeds/videos.xml?channel_id=UC6RxYnvF2jQV8FKdGalZqmw"
+  status = 200
+  force = true

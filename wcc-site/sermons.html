@@ -218,7 +218,7 @@
 <script>
   const CHANNEL_ID = 'UC6RxYnvF2jQV8FKdGalZqmw';
   const RSS_URL = 'https://www.youtube.com/feeds/videos.xml?channel_id=' + CHANNEL_ID;
-  const PROXY   = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(RSS_URL);
+  const PROXY   = '/api/yt-feed';
 
   function videoIdFromEntry(entry) {
     const link = entry.querySelector('link[rel="alternate"]');
